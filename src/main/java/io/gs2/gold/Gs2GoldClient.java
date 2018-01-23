@@ -75,7 +75,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
         if(request.getContext() != null) body.put("context", request.getContext());
 		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null ? "null" : request.getGoldName()) + "/wallet/user/self/action/add",
+				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/self/action/add",
 				credential,
 				ENDPOINT,
 				AddToMyWalletRequest.Constant.MODULE,
@@ -108,7 +108,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
         if(request.getContext() != null) body.put("context", request.getContext());
 		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null ? "null" : request.getUserId()) + "/action/add",
+				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "/action/add",
 				credential,
 				ENDPOINT,
 				AddToWalletRequest.Constant.MODULE,
@@ -134,17 +134,23 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 	public CreateGoldResult createGold(CreateGoldRequest request) {
 
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("serviceClass", request.getServiceClass())
-				.put("name", request.getName());
+				.put("name", request.getName())
+				.put("serviceClass", request.getServiceClass());
 
-        if(request.getResetDayOfMonth() != null) body.put("resetDayOfMonth", request.getResetDayOfMonth());
-        if(request.getRestrictionType() != null) body.put("restrictionType", request.getRestrictionType());
-        if(request.getResetHour() != null) body.put("resetHour", request.getResetHour());
+        if(request.getDescription() != null) body.put("description", request.getDescription());
         if(request.getBalanceMax() != null) body.put("balanceMax", request.getBalanceMax());
+        if(request.getRestrictionType() != null) body.put("restrictionType", request.getRestrictionType());
+        if(request.getResetDayOfMonth() != null) body.put("resetDayOfMonth", request.getResetDayOfMonth());
+        if(request.getResetDayOfWeek() != null) body.put("resetDayOfWeek", request.getResetDayOfWeek());
+        if(request.getResetHour() != null) body.put("resetHour", request.getResetHour());
         if(request.getPeriodicalLimit() != null) body.put("periodicalLimit", request.getPeriodicalLimit());
         if(request.getNotificationUrl() != null) body.put("notificationUrl", request.getNotificationUrl());
-        if(request.getResetDayOfWeek() != null) body.put("resetDayOfWeek", request.getResetDayOfWeek());
-        if(request.getDescription() != null) body.put("description", request.getDescription());
+        if(request.getCreateWalletTriggerScript() != null) body.put("createWalletTriggerScript", request.getCreateWalletTriggerScript());
+        if(request.getCreateWalletDoneTriggerScript() != null) body.put("createWalletDoneTriggerScript", request.getCreateWalletDoneTriggerScript());
+        if(request.getAddToWalletTriggerScript() != null) body.put("addToWalletTriggerScript", request.getAddToWalletTriggerScript());
+        if(request.getAddToWalletDoneTriggerScript() != null) body.put("addToWalletDoneTriggerScript", request.getAddToWalletDoneTriggerScript());
+        if(request.getSubtractFromWalletTriggerScript() != null) body.put("subtractFromWalletTriggerScript", request.getSubtractFromWalletTriggerScript());
+        if(request.getSubtractFromWalletDoneTriggerScript() != null) body.put("subtractFromWalletDoneTriggerScript", request.getSubtractFromWalletDoneTriggerScript());
 		HttpPost post = createHttpPost(
 				Gs2Constant.ENDPOINT_HOST + "/gold",
 				credential,
@@ -169,7 +175,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	public void deleteGold(DeleteGoldRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null ? "null" : request.getGoldName()) + "";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "";
 
 
 
@@ -262,7 +268,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	public void describeWallet(DescribeWalletRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null ? "null" : request.getGoldName()) + "/wallet";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet";
 
         List<NameValuePair> queryString = new ArrayList<>();
         if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
@@ -298,7 +304,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	public GetGoldResult getGold(GetGoldRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null ? "null" : request.getGoldName()) + "";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "";
 
 
 
@@ -327,7 +333,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	public GetGoldStatusResult getGoldStatus(GetGoldStatusRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null ? "null" : request.getGoldName()) + "/status";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/status";
 
 
 
@@ -358,7 +364,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	public GetMyWalletResult getMyWallet(GetMyWalletRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null ? "null" : request.getGoldName()) + "/wallet/user/self";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/self";
 
 
 
@@ -390,7 +396,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	public GetWalletResult getWallet(GetWalletRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null ? "null" : request.getUserId()) + "";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "";
 
 
 
@@ -425,7 +431,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				.put("value", request.getValue());
 
 		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null ? "null" : request.getUserId()) + "/action/reset",
+				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "/action/reset",
 				credential,
 				ENDPOINT,
 				ResetLatestGainRequest.Constant.MODULE,
@@ -457,7 +463,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
         if(request.getContext() != null) body.put("context", request.getContext());
 		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null ? "null" : request.getGoldName()) + "/wallet/user/self/action/subtract",
+				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/self/action/subtract",
 				credential,
 				ENDPOINT,
 				SubtractFromMyWalletRequest.Constant.MODULE,
@@ -490,7 +496,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
         if(request.getContext() != null) body.put("context", request.getContext());
 		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null ? "null" : request.getUserId()) + "/action/subtract",
+				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "/action/subtract",
 				credential,
 				ENDPOINT,
 				SubtractFromWalletRequest.Constant.MODULE,
@@ -519,15 +525,21 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				.put("serviceClass", request.getServiceClass());
 
         if(request.getDescription() != null) body.put("description", request.getDescription());
-        if(request.getResetHour() != null) body.put("resetHour", request.getResetHour());
         if(request.getBalanceMax() != null) body.put("balanceMax", request.getBalanceMax());
-        if(request.getPeriodicalLimit() != null) body.put("periodicalLimit", request.getPeriodicalLimit());
+        if(request.getRestrictionType() != null) body.put("restrictionType", request.getRestrictionType());
         if(request.getResetDayOfMonth() != null) body.put("resetDayOfMonth", request.getResetDayOfMonth());
         if(request.getResetDayOfWeek() != null) body.put("resetDayOfWeek", request.getResetDayOfWeek());
+        if(request.getResetHour() != null) body.put("resetHour", request.getResetHour());
+        if(request.getPeriodicalLimit() != null) body.put("periodicalLimit", request.getPeriodicalLimit());
         if(request.getNotificationUrl() != null) body.put("notificationUrl", request.getNotificationUrl());
-        if(request.getRestrictionType() != null) body.put("restrictionType", request.getRestrictionType());
+        if(request.getCreateWalletTriggerScript() != null) body.put("createWalletTriggerScript", request.getCreateWalletTriggerScript());
+        if(request.getCreateWalletDoneTriggerScript() != null) body.put("createWalletDoneTriggerScript", request.getCreateWalletDoneTriggerScript());
+        if(request.getAddToWalletTriggerScript() != null) body.put("addToWalletTriggerScript", request.getAddToWalletTriggerScript());
+        if(request.getAddToWalletDoneTriggerScript() != null) body.put("addToWalletDoneTriggerScript", request.getAddToWalletDoneTriggerScript());
+        if(request.getSubtractFromWalletTriggerScript() != null) body.put("subtractFromWalletTriggerScript", request.getSubtractFromWalletTriggerScript());
+        if(request.getSubtractFromWalletDoneTriggerScript() != null) body.put("subtractFromWalletDoneTriggerScript", request.getSubtractFromWalletDoneTriggerScript());
 		HttpPut put = createHttpPut(
-				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null ? "null" : request.getGoldName()) + "",
+				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "",
 				credential,
 				ENDPOINT,
 				UpdateGoldRequest.Constant.MODULE,

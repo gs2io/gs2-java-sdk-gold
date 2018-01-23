@@ -21,7 +21,12 @@
 			<artifactId>gs2-java-sdk-auth</artifactId>
 			<version>0.2.0</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>io.gs2</groupId>
+            <artifactId>gs2-java-sdk-core</artifactId>
+            <version>0.2.1</version>
+        </dependency>
+    </dependencies>
 
 	<name>Game Server Services GS2-Gold SDK for Java</name>
 	<url>https://gs2.io/</url>

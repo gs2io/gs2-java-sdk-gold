@@ -36,17 +36,14 @@ public class Wallet implements Serializable {
 	/** 残高 */
 	private Integer balance;
 
-	/** 最終更新日時(エポック秒) */
-	private Integer updateAt;
-
 	/** 直近の期間の取得量 */
 	private Integer latestGain;
 
-	/** 作成日時(エポック秒)
-
-ウォレットは初回の更新処理時に永続化されるため、それまでは取得の都度、作成日時は変化します。
- */
+	/** 作成日時(エポック秒) */
 	private Integer createAt;
+
+	/** 最終更新日時(エポック秒) */
+	private Integer updateAt;
 
 
 	/**
@@ -86,24 +83,6 @@ public class Wallet implements Serializable {
 	}
 
 	/**
-	 * 最終更新日時(エポック秒)を取得
-	 *
-	 * @return 最終更新日時(エポック秒)
-	 */
-	public Integer getUpdateAt() {
-		return updateAt;
-	}
-
-	/**
-	 * 最終更新日時(エポック秒)を設定
-	 *
-	 * @param updateAt 最終更新日時(エポック秒)
-	 */
-	public void setUpdateAt(Integer updateAt) {
-		this.updateAt = updateAt;
-	}
-
-	/**
 	 * 直近の期間の取得量を取得
 	 *
 	 * @return 直近の期間の取得量
@@ -122,33 +101,39 @@ public class Wallet implements Serializable {
 	}
 
 	/**
-	 * 作成日時(エポック秒)
-
-ウォレットは初回の更新処理時に永続化されるため、それまでは取得の都度、作成日時は変化します。
-を取得
+	 * 作成日時(エポック秒)を取得
 	 *
 	 * @return 作成日時(エポック秒)
-
-ウォレットは初回の更新処理時に永続化されるため、それまでは取得の都度、作成日時は変化します。
-
 	 */
 	public Integer getCreateAt() {
 		return createAt;
 	}
 
 	/**
-	 * 作成日時(エポック秒)
-
-ウォレットは初回の更新処理時に永続化されるため、それまでは取得の都度、作成日時は変化します。
-を設定
+	 * 作成日時(エポック秒)を設定
 	 *
 	 * @param createAt 作成日時(エポック秒)
-
-ウォレットは初回の更新処理時に永続化されるため、それまでは取得の都度、作成日時は変化します。
-
 	 */
 	public void setCreateAt(Integer createAt) {
 		this.createAt = createAt;
+	}
+
+	/**
+	 * 最終更新日時(エポック秒)を取得
+	 *
+	 * @return 最終更新日時(エポック秒)
+	 */
+	public Integer getUpdateAt() {
+		return updateAt;
+	}
+
+	/**
+	 * 最終更新日時(エポック秒)を設定
+	 *
+	 * @param updateAt 最終更新日時(エポック秒)
+	 */
+	public void setUpdateAt(Integer updateAt) {
+		this.updateAt = updateAt;
 	}
 
 }

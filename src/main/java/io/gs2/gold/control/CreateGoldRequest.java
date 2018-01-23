@@ -31,14 +31,11 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 		public static final String FUNCTION = "CreateGold";
 	}
 
-	/** 期間内の取得量をリセットする日にち */
-	private Integer resetDayOfMonth;
+	/** ゴールド名 */
+	private String name;
 
-	/** 取得量の期間制限のタイプ */
-	private String restrictionType;
-
-	/** 期間内の取得量をリセットする時 */
-	private Integer resetHour;
+	/** 説明文 */
+	private String description;
 
 	/** サービスクラス */
 	private String serviceClass;
@@ -46,8 +43,17 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	/** 各ウォレットの残高の最大値 */
 	private Integer balanceMax;
 
-	/** ゴールド名 */
-	private String name;
+	/** 取得量の期間制限のタイプ */
+	private String restrictionType;
+
+	/** 期間内の取得量をリセットする日にち */
+	private Integer resetDayOfMonth;
+
+	/** 期間内の取得量をリセットする曜日 */
+	private String resetDayOfWeek;
+
+	/** 期間内の取得量をリセットする時 */
+	private Integer resetHour;
 
 	/** 期間内の最大取得量 */
 	private Integer periodicalLimit;
@@ -55,97 +61,80 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	/** 通知先 URL */
 	private String notificationUrl;
 
-	/** 期間内の取得量をリセットする曜日 */
-	private String resetDayOfWeek;
+	/** ウォレットの生成時 に実行されるGS2-Script */
+	private String createWalletTriggerScript;
 
-	/** 説明文 */
-	private String description;
+	/** ウォレットの生成完了時 に実行されるGS2-Script */
+	private String createWalletDoneTriggerScript;
+
+	/** ウォレットへの加算時 に実行されるGS2-Script */
+	private String addToWalletTriggerScript;
+
+	/** ウォレットへの加算完了時 に実行されるGS2-Script */
+	private String addToWalletDoneTriggerScript;
+
+	/** ウォレットからの減算時 に実行されるGS2-Script */
+	private String subtractFromWalletTriggerScript;
+
+	/** ウォレットからの減算完了時 に実行されるGS2-Script */
+	private String subtractFromWalletDoneTriggerScript;
 
 
 	/**
-	 * 期間内の取得量をリセットする日にちを取得
+	 * ゴールド名を取得
 	 *
-	 * @return 期間内の取得量をリセットする日にち
+	 * @return ゴールド名
 	 */
-	public Integer getResetDayOfMonth() {
-		return resetDayOfMonth;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * 期間内の取得量をリセットする日にちを設定
+	 * ゴールド名を設定
 	 *
-	 * @param resetDayOfMonth 期間内の取得量をリセットする日にち
+	 * @param name ゴールド名
 	 */
-	public void setResetDayOfMonth(Integer resetDayOfMonth) {
-		this.resetDayOfMonth = resetDayOfMonth;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
-	 * 期間内の取得量をリセットする日にちを設定
+	 * ゴールド名を設定
 	 *
-	 * @param resetDayOfMonth 期間内の取得量をリセットする日にち
+	 * @param name ゴールド名
 	 * @return this
 	 */
-	public CreateGoldRequest withResetDayOfMonth(Integer resetDayOfMonth) {
-		setResetDayOfMonth(resetDayOfMonth);
+	public CreateGoldRequest withName(String name) {
+		setName(name);
 		return this;
 	}
 
 	/**
-	 * 取得量の期間制限のタイプを取得
+	 * 説明文を取得
 	 *
-	 * @return 取得量の期間制限のタイプ
+	 * @return 説明文
 	 */
-	public String getRestrictionType() {
-		return restrictionType;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
-	 * 取得量の期間制限のタイプを設定
+	 * 説明文を設定
 	 *
-	 * @param restrictionType 取得量の期間制限のタイプ
+	 * @param description 説明文
 	 */
-	public void setRestrictionType(String restrictionType) {
-		this.restrictionType = restrictionType;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**
-	 * 取得量の期間制限のタイプを設定
+	 * 説明文を設定
 	 *
-	 * @param restrictionType 取得量の期間制限のタイプ
+	 * @param description 説明文
 	 * @return this
 	 */
-	public CreateGoldRequest withRestrictionType(String restrictionType) {
-		setRestrictionType(restrictionType);
-		return this;
-	}
-
-	/**
-	 * 期間内の取得量をリセットする時を取得
-	 *
-	 * @return 期間内の取得量をリセットする時
-	 */
-	public Integer getResetHour() {
-		return resetHour;
-	}
-
-	/**
-	 * 期間内の取得量をリセットする時を設定
-	 *
-	 * @param resetHour 期間内の取得量をリセットする時
-	 */
-	public void setResetHour(Integer resetHour) {
-		this.resetHour = resetHour;
-	}
-
-	/**
-	 * 期間内の取得量をリセットする時を設定
-	 *
-	 * @param resetHour 期間内の取得量をリセットする時
-	 * @return this
-	 */
-	public CreateGoldRequest withResetHour(Integer resetHour) {
-		setResetHour(resetHour);
+	public CreateGoldRequest withDescription(String description) {
+		setDescription(description);
 		return this;
 	}
 
@@ -208,31 +197,118 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	}
 
 	/**
-	 * ゴールド名を取得
+	 * 取得量の期間制限のタイプを取得
 	 *
-	 * @return ゴールド名
+	 * @return 取得量の期間制限のタイプ
 	 */
-	public String getName() {
-		return name;
+	public String getRestrictionType() {
+		return restrictionType;
 	}
 
 	/**
-	 * ゴールド名を設定
+	 * 取得量の期間制限のタイプを設定
 	 *
-	 * @param name ゴールド名
+	 * @param restrictionType 取得量の期間制限のタイプ
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setRestrictionType(String restrictionType) {
+		this.restrictionType = restrictionType;
 	}
 
 	/**
-	 * ゴールド名を設定
+	 * 取得量の期間制限のタイプを設定
 	 *
-	 * @param name ゴールド名
+	 * @param restrictionType 取得量の期間制限のタイプ
 	 * @return this
 	 */
-	public CreateGoldRequest withName(String name) {
-		setName(name);
+	public CreateGoldRequest withRestrictionType(String restrictionType) {
+		setRestrictionType(restrictionType);
+		return this;
+	}
+
+	/**
+	 * 期間内の取得量をリセットする日にちを取得
+	 *
+	 * @return 期間内の取得量をリセットする日にち
+	 */
+	public Integer getResetDayOfMonth() {
+		return resetDayOfMonth;
+	}
+
+	/**
+	 * 期間内の取得量をリセットする日にちを設定
+	 *
+	 * @param resetDayOfMonth 期間内の取得量をリセットする日にち
+	 */
+	public void setResetDayOfMonth(Integer resetDayOfMonth) {
+		this.resetDayOfMonth = resetDayOfMonth;
+	}
+
+	/**
+	 * 期間内の取得量をリセットする日にちを設定
+	 *
+	 * @param resetDayOfMonth 期間内の取得量をリセットする日にち
+	 * @return this
+	 */
+	public CreateGoldRequest withResetDayOfMonth(Integer resetDayOfMonth) {
+		setResetDayOfMonth(resetDayOfMonth);
+		return this;
+	}
+
+	/**
+	 * 期間内の取得量をリセットする曜日を取得
+	 *
+	 * @return 期間内の取得量をリセットする曜日
+	 */
+	public String getResetDayOfWeek() {
+		return resetDayOfWeek;
+	}
+
+	/**
+	 * 期間内の取得量をリセットする曜日を設定
+	 *
+	 * @param resetDayOfWeek 期間内の取得量をリセットする曜日
+	 */
+	public void setResetDayOfWeek(String resetDayOfWeek) {
+		this.resetDayOfWeek = resetDayOfWeek;
+	}
+
+	/**
+	 * 期間内の取得量をリセットする曜日を設定
+	 *
+	 * @param resetDayOfWeek 期間内の取得量をリセットする曜日
+	 * @return this
+	 */
+	public CreateGoldRequest withResetDayOfWeek(String resetDayOfWeek) {
+		setResetDayOfWeek(resetDayOfWeek);
+		return this;
+	}
+
+	/**
+	 * 期間内の取得量をリセットする時を取得
+	 *
+	 * @return 期間内の取得量をリセットする時
+	 */
+	public Integer getResetHour() {
+		return resetHour;
+	}
+
+	/**
+	 * 期間内の取得量をリセットする時を設定
+	 *
+	 * @param resetHour 期間内の取得量をリセットする時
+	 */
+	public void setResetHour(Integer resetHour) {
+		this.resetHour = resetHour;
+	}
+
+	/**
+	 * 期間内の取得量をリセットする時を設定
+	 *
+	 * @param resetHour 期間内の取得量をリセットする時
+	 * @return this
+	 */
+	public CreateGoldRequest withResetHour(Integer resetHour) {
+		setResetHour(resetHour);
 		return this;
 	}
 
@@ -295,60 +371,176 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	}
 
 	/**
-	 * 期間内の取得量をリセットする曜日を取得
+	 * ウォレットの生成時 に実行されるGS2-Scriptを取得
 	 *
-	 * @return 期間内の取得量をリセットする曜日
+	 * @return ウォレットの生成時 に実行されるGS2-Script
 	 */
-	public String getResetDayOfWeek() {
-		return resetDayOfWeek;
+	public String getCreateWalletTriggerScript() {
+		return createWalletTriggerScript;
 	}
 
 	/**
-	 * 期間内の取得量をリセットする曜日を設定
+	 * ウォレットの生成時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param resetDayOfWeek 期間内の取得量をリセットする曜日
+	 * @param createWalletTriggerScript ウォレットの生成時 に実行されるGS2-Script
 	 */
-	public void setResetDayOfWeek(String resetDayOfWeek) {
-		this.resetDayOfWeek = resetDayOfWeek;
+	public void setCreateWalletTriggerScript(String createWalletTriggerScript) {
+		this.createWalletTriggerScript = createWalletTriggerScript;
 	}
 
 	/**
-	 * 期間内の取得量をリセットする曜日を設定
+	 * ウォレットの生成時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param resetDayOfWeek 期間内の取得量をリセットする曜日
+	 * @param createWalletTriggerScript ウォレットの生成時 に実行されるGS2-Script
 	 * @return this
 	 */
-	public CreateGoldRequest withResetDayOfWeek(String resetDayOfWeek) {
-		setResetDayOfWeek(resetDayOfWeek);
+	public CreateGoldRequest withCreateWalletTriggerScript(String createWalletTriggerScript) {
+		setCreateWalletTriggerScript(createWalletTriggerScript);
 		return this;
 	}
 
 	/**
-	 * 説明文を取得
+	 * ウォレットの生成完了時 に実行されるGS2-Scriptを取得
 	 *
-	 * @return 説明文
+	 * @return ウォレットの生成完了時 に実行されるGS2-Script
 	 */
-	public String getDescription() {
-		return description;
+	public String getCreateWalletDoneTriggerScript() {
+		return createWalletDoneTriggerScript;
 	}
 
 	/**
-	 * 説明文を設定
+	 * ウォレットの生成完了時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param description 説明文
+	 * @param createWalletDoneTriggerScript ウォレットの生成完了時 に実行されるGS2-Script
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCreateWalletDoneTriggerScript(String createWalletDoneTriggerScript) {
+		this.createWalletDoneTriggerScript = createWalletDoneTriggerScript;
 	}
 
 	/**
-	 * 説明文を設定
+	 * ウォレットの生成完了時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param description 説明文
+	 * @param createWalletDoneTriggerScript ウォレットの生成完了時 に実行されるGS2-Script
 	 * @return this
 	 */
-	public CreateGoldRequest withDescription(String description) {
-		setDescription(description);
+	public CreateGoldRequest withCreateWalletDoneTriggerScript(String createWalletDoneTriggerScript) {
+		setCreateWalletDoneTriggerScript(createWalletDoneTriggerScript);
+		return this;
+	}
+
+	/**
+	 * ウォレットへの加算時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ウォレットへの加算時 に実行されるGS2-Script
+	 */
+	public String getAddToWalletTriggerScript() {
+		return addToWalletTriggerScript;
+	}
+
+	/**
+	 * ウォレットへの加算時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param addToWalletTriggerScript ウォレットへの加算時 に実行されるGS2-Script
+	 */
+	public void setAddToWalletTriggerScript(String addToWalletTriggerScript) {
+		this.addToWalletTriggerScript = addToWalletTriggerScript;
+	}
+
+	/**
+	 * ウォレットへの加算時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param addToWalletTriggerScript ウォレットへの加算時 に実行されるGS2-Script
+	 * @return this
+	 */
+	public CreateGoldRequest withAddToWalletTriggerScript(String addToWalletTriggerScript) {
+		setAddToWalletTriggerScript(addToWalletTriggerScript);
+		return this;
+	}
+
+	/**
+	 * ウォレットへの加算完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ウォレットへの加算完了時 に実行されるGS2-Script
+	 */
+	public String getAddToWalletDoneTriggerScript() {
+		return addToWalletDoneTriggerScript;
+	}
+
+	/**
+	 * ウォレットへの加算完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param addToWalletDoneTriggerScript ウォレットへの加算完了時 に実行されるGS2-Script
+	 */
+	public void setAddToWalletDoneTriggerScript(String addToWalletDoneTriggerScript) {
+		this.addToWalletDoneTriggerScript = addToWalletDoneTriggerScript;
+	}
+
+	/**
+	 * ウォレットへの加算完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param addToWalletDoneTriggerScript ウォレットへの加算完了時 に実行されるGS2-Script
+	 * @return this
+	 */
+	public CreateGoldRequest withAddToWalletDoneTriggerScript(String addToWalletDoneTriggerScript) {
+		setAddToWalletDoneTriggerScript(addToWalletDoneTriggerScript);
+		return this;
+	}
+
+	/**
+	 * ウォレットからの減算時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ウォレットからの減算時 に実行されるGS2-Script
+	 */
+	public String getSubtractFromWalletTriggerScript() {
+		return subtractFromWalletTriggerScript;
+	}
+
+	/**
+	 * ウォレットからの減算時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param subtractFromWalletTriggerScript ウォレットからの減算時 に実行されるGS2-Script
+	 */
+	public void setSubtractFromWalletTriggerScript(String subtractFromWalletTriggerScript) {
+		this.subtractFromWalletTriggerScript = subtractFromWalletTriggerScript;
+	}
+
+	/**
+	 * ウォレットからの減算時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param subtractFromWalletTriggerScript ウォレットからの減算時 に実行されるGS2-Script
+	 * @return this
+	 */
+	public CreateGoldRequest withSubtractFromWalletTriggerScript(String subtractFromWalletTriggerScript) {
+		setSubtractFromWalletTriggerScript(subtractFromWalletTriggerScript);
+		return this;
+	}
+
+	/**
+	 * ウォレットからの減算完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ウォレットからの減算完了時 に実行されるGS2-Script
+	 */
+	public String getSubtractFromWalletDoneTriggerScript() {
+		return subtractFromWalletDoneTriggerScript;
+	}
+
+	/**
+	 * ウォレットからの減算完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param subtractFromWalletDoneTriggerScript ウォレットからの減算完了時 に実行されるGS2-Script
+	 */
+	public void setSubtractFromWalletDoneTriggerScript(String subtractFromWalletDoneTriggerScript) {
+		this.subtractFromWalletDoneTriggerScript = subtractFromWalletDoneTriggerScript;
+	}
+
+	/**
+	 * ウォレットからの減算完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param subtractFromWalletDoneTriggerScript ウォレットからの減算完了時 に実行されるGS2-Script
+	 * @return this
+	 */
+	public CreateGoldRequest withSubtractFromWalletDoneTriggerScript(String subtractFromWalletDoneTriggerScript) {
+		setSubtractFromWalletDoneTriggerScript(subtractFromWalletDoneTriggerScript);
 		return this;
 	}
 

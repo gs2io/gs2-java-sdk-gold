@@ -30,18 +30,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Gold implements Serializable {
 
-	/** 取得量の期間制限のタイプ */
-	private String restrictionType;
+	/** ゴールドGRN */
+	private String goldId;
+
+	/** オーナーID */
+	private String ownerId;
 
 	/** ゴールド名 */
 	private String name;
 
-	/** 期間内の取得量をリセットする時
-
-restrictionType が monthly, weekly, daily のときに指定してください。
-0 〜 23 で指定し、 UTC として解釈されます。
- */
-	private Integer resetHour;
+	/** 説明文 */
+	private String description;
 
 	/** サービスクラス */
 	private String serviceClass;
@@ -49,60 +48,83 @@ restrictionType が monthly, weekly, daily のときに指定してください�
 	/** 各ウォレットの残高の最大値 */
 	private Integer balanceMax;
 
-	/** ゴールドGRN */
-	private String goldId;
+	/** 取得量の期間制限のタイプ */
+	private String restrictionType;
 
-	/** 期間内の最大取得量
-
-指定しなかった場合は 99999999 として扱われます。
- */
-	private Integer periodicalLimit;
-
-	/** 作成日時(エポック秒) */
-	private Integer createAt;
-
-	/** 期間内の取得量をリセットする日にち
-
-restrictionType が monthly のときに指定してください。
-月末日を超える値を指定した場合、月末日に丸められます。
- */
+	/** 期間内の取得量をリセットする日にち */
 	private Integer resetDayOfMonth;
 
-	/** 期間内の取得量をリセットする曜日
-
-restrictionType が weekly のときに指定してください。
- */
+	/** 期間内の取得量をリセットする曜日 */
 	private String resetDayOfWeek;
 
-	/** オーナーID */
-	private String ownerId;
+	/** 期間内の取得量をリセットする時 */
+	private Integer resetHour;
 
-	/** 最終更新日時(エポック秒) */
-	private Integer updateAt;
+	/** 期間内の最大取得量 */
+	private Integer periodicalLimit;
 
 	/** 通知先 URL */
 	private String notificationUrl;
 
-	/** 説明文 */
-	private String description;
+	/** ウォレットの生成時 に実行されるGS2-Script */
+	private String createWalletTriggerScript;
+
+	/** ウォレットの生成完了時 に実行されるGS2-Script */
+	private String createWalletDoneTriggerScript;
+
+	/** ウォレットへの加算時 に実行されるGS2-Script */
+	private String addToWalletTriggerScript;
+
+	/** ウォレットへの加算完了時 に実行されるGS2-Script */
+	private String addToWalletDoneTriggerScript;
+
+	/** ウォレットからの減算時 に実行されるGS2-Script */
+	private String subtractFromWalletTriggerScript;
+
+	/** ウォレットからの減算完了時 に実行されるGS2-Script */
+	private String subtractFromWalletDoneTriggerScript;
+
+	/** 作成日時(エポック秒) */
+	private Integer createAt;
+
+	/** 最終更新日時(エポック秒) */
+	private Integer updateAt;
 
 
 	/**
-	 * 取得量の期間制限のタイプを取得
+	 * ゴールドGRNを取得
 	 *
-	 * @return 取得量の期間制限のタイプ
+	 * @return ゴールドGRN
 	 */
-	public String getRestrictionType() {
-		return restrictionType;
+	public String getGoldId() {
+		return goldId;
 	}
 
 	/**
-	 * 取得量の期間制限のタイプを設定
+	 * ゴールドGRNを設定
 	 *
-	 * @param restrictionType 取得量の期間制限のタイプ
+	 * @param goldId ゴールドGRN
 	 */
-	public void setRestrictionType(String restrictionType) {
-		this.restrictionType = restrictionType;
+	public void setGoldId(String goldId) {
+		this.goldId = goldId;
+	}
+
+	/**
+	 * オーナーIDを取得
+	 *
+	 * @return オーナーID
+	 */
+	public String getOwnerId() {
+		return ownerId;
+	}
+
+	/**
+	 * オーナーIDを設定
+	 *
+	 * @param ownerId オーナーID
+	 */
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
 	}
 
 	/**
@@ -124,37 +146,21 @@ restrictionType が weekly のときに指定してください。
 	}
 
 	/**
-	 * 期間内の取得量をリセットする時
-
-restrictionType が monthly, weekly, daily のときに指定してください。
-0 〜 23 で指定し、 UTC として解釈されます。
-を取得
+	 * 説明文を取得
 	 *
-	 * @return 期間内の取得量をリセットする時
-
-restrictionType が monthly, weekly, daily のときに指定してください。
-0 〜 23 で指定し、 UTC として解釈されます。
-
+	 * @return 説明文
 	 */
-	public Integer getResetHour() {
-		return resetHour;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
-	 * 期間内の取得量をリセットする時
-
-restrictionType が monthly, weekly, daily のときに指定してください。
-0 〜 23 で指定し、 UTC として解釈されます。
-を設定
+	 * 説明文を設定
 	 *
-	 * @param resetHour 期間内の取得量をリセットする時
-
-restrictionType が monthly, weekly, daily のときに指定してください。
-0 〜 23 で指定し、 UTC として解釈されます。
-
+	 * @param description 説明文
 	 */
-	public void setResetHour(Integer resetHour) {
-		this.resetHour = resetHour;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**
@@ -194,169 +200,93 @@ restrictionType が monthly, weekly, daily のときに指定してください�
 	}
 
 	/**
-	 * ゴールドGRNを取得
+	 * 取得量の期間制限のタイプを取得
 	 *
-	 * @return ゴールドGRN
+	 * @return 取得量の期間制限のタイプ
 	 */
-	public String getGoldId() {
-		return goldId;
+	public String getRestrictionType() {
+		return restrictionType;
 	}
 
 	/**
-	 * ゴールドGRNを設定
+	 * 取得量の期間制限のタイプを設定
 	 *
-	 * @param goldId ゴールドGRN
+	 * @param restrictionType 取得量の期間制限のタイプ
 	 */
-	public void setGoldId(String goldId) {
-		this.goldId = goldId;
+	public void setRestrictionType(String restrictionType) {
+		this.restrictionType = restrictionType;
 	}
 
 	/**
-	 * 期間内の最大取得量
-
-指定しなかった場合は 99999999 として扱われます。
-を取得
-	 *
-	 * @return 期間内の最大取得量
-
-指定しなかった場合は 99999999 として扱われます。
-
-	 */
-	public Integer getPeriodicalLimit() {
-		return periodicalLimit;
-	}
-
-	/**
-	 * 期間内の最大取得量
-
-指定しなかった場合は 99999999 として扱われます。
-を設定
-	 *
-	 * @param periodicalLimit 期間内の最大取得量
-
-指定しなかった場合は 99999999 として扱われます。
-
-	 */
-	public void setPeriodicalLimit(Integer periodicalLimit) {
-		this.periodicalLimit = periodicalLimit;
-	}
-
-	/**
-	 * 作成日時(エポック秒)を取得
-	 *
-	 * @return 作成日時(エポック秒)
-	 */
-	public Integer getCreateAt() {
-		return createAt;
-	}
-
-	/**
-	 * 作成日時(エポック秒)を設定
-	 *
-	 * @param createAt 作成日時(エポック秒)
-	 */
-	public void setCreateAt(Integer createAt) {
-		this.createAt = createAt;
-	}
-
-	/**
-	 * 期間内の取得量をリセットする日にち
-
-restrictionType が monthly のときに指定してください。
-月末日を超える値を指定した場合、月末日に丸められます。
-を取得
+	 * 期間内の取得量をリセットする日にちを取得
 	 *
 	 * @return 期間内の取得量をリセットする日にち
-
-restrictionType が monthly のときに指定してください。
-月末日を超える値を指定した場合、月末日に丸められます。
-
 	 */
 	public Integer getResetDayOfMonth() {
 		return resetDayOfMonth;
 	}
 
 	/**
-	 * 期間内の取得量をリセットする日にち
-
-restrictionType が monthly のときに指定してください。
-月末日を超える値を指定した場合、月末日に丸められます。
-を設定
+	 * 期間内の取得量をリセットする日にちを設定
 	 *
 	 * @param resetDayOfMonth 期間内の取得量をリセットする日にち
-
-restrictionType が monthly のときに指定してください。
-月末日を超える値を指定した場合、月末日に丸められます。
-
 	 */
 	public void setResetDayOfMonth(Integer resetDayOfMonth) {
 		this.resetDayOfMonth = resetDayOfMonth;
 	}
 
 	/**
-	 * 期間内の取得量をリセットする曜日
-
-restrictionType が weekly のときに指定してください。
-を取得
+	 * 期間内の取得量をリセットする曜日を取得
 	 *
 	 * @return 期間内の取得量をリセットする曜日
-
-restrictionType が weekly のときに指定してください。
-
 	 */
 	public String getResetDayOfWeek() {
 		return resetDayOfWeek;
 	}
 
 	/**
-	 * 期間内の取得量をリセットする曜日
-
-restrictionType が weekly のときに指定してください。
-を設定
+	 * 期間内の取得量をリセットする曜日を設定
 	 *
 	 * @param resetDayOfWeek 期間内の取得量をリセットする曜日
-
-restrictionType が weekly のときに指定してください。
-
 	 */
 	public void setResetDayOfWeek(String resetDayOfWeek) {
 		this.resetDayOfWeek = resetDayOfWeek;
 	}
 
 	/**
-	 * オーナーIDを取得
+	 * 期間内の取得量をリセットする時を取得
 	 *
-	 * @return オーナーID
+	 * @return 期間内の取得量をリセットする時
 	 */
-	public String getOwnerId() {
-		return ownerId;
+	public Integer getResetHour() {
+		return resetHour;
 	}
 
 	/**
-	 * オーナーIDを設定
+	 * 期間内の取得量をリセットする時を設定
 	 *
-	 * @param ownerId オーナーID
+	 * @param resetHour 期間内の取得量をリセットする時
 	 */
-	public void setOwnerId(String ownerId) {
-		this.ownerId = ownerId;
+	public void setResetHour(Integer resetHour) {
+		this.resetHour = resetHour;
 	}
 
 	/**
-	 * 最終更新日時(エポック秒)を取得
+	 * 期間内の最大取得量を取得
 	 *
-	 * @return 最終更新日時(エポック秒)
+	 * @return 期間内の最大取得量
 	 */
-	public Integer getUpdateAt() {
-		return updateAt;
+	public Integer getPeriodicalLimit() {
+		return periodicalLimit;
 	}
 
 	/**
-	 * 最終更新日時(エポック秒)を設定
+	 * 期間内の最大取得量を設定
 	 *
-	 * @param updateAt 最終更新日時(エポック秒)
+	 * @param periodicalLimit 期間内の最大取得量
 	 */
-	public void setUpdateAt(Integer updateAt) {
-		this.updateAt = updateAt;
+	public void setPeriodicalLimit(Integer periodicalLimit) {
+		this.periodicalLimit = periodicalLimit;
 	}
 
 	/**
@@ -378,21 +308,147 @@ restrictionType が weekly のときに指定してください。
 	}
 
 	/**
-	 * 説明文を取得
+	 * ウォレットの生成時 に実行されるGS2-Scriptを取得
 	 *
-	 * @return 説明文
+	 * @return ウォレットの生成時 に実行されるGS2-Script
 	 */
-	public String getDescription() {
-		return description;
+	public String getCreateWalletTriggerScript() {
+		return createWalletTriggerScript;
 	}
 
 	/**
-	 * 説明文を設定
+	 * ウォレットの生成時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param description 説明文
+	 * @param createWalletTriggerScript ウォレットの生成時 に実行されるGS2-Script
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCreateWalletTriggerScript(String createWalletTriggerScript) {
+		this.createWalletTriggerScript = createWalletTriggerScript;
+	}
+
+	/**
+	 * ウォレットの生成完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ウォレットの生成完了時 に実行されるGS2-Script
+	 */
+	public String getCreateWalletDoneTriggerScript() {
+		return createWalletDoneTriggerScript;
+	}
+
+	/**
+	 * ウォレットの生成完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createWalletDoneTriggerScript ウォレットの生成完了時 に実行されるGS2-Script
+	 */
+	public void setCreateWalletDoneTriggerScript(String createWalletDoneTriggerScript) {
+		this.createWalletDoneTriggerScript = createWalletDoneTriggerScript;
+	}
+
+	/**
+	 * ウォレットへの加算時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ウォレットへの加算時 に実行されるGS2-Script
+	 */
+	public String getAddToWalletTriggerScript() {
+		return addToWalletTriggerScript;
+	}
+
+	/**
+	 * ウォレットへの加算時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param addToWalletTriggerScript ウォレットへの加算時 に実行されるGS2-Script
+	 */
+	public void setAddToWalletTriggerScript(String addToWalletTriggerScript) {
+		this.addToWalletTriggerScript = addToWalletTriggerScript;
+	}
+
+	/**
+	 * ウォレットへの加算完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ウォレットへの加算完了時 に実行されるGS2-Script
+	 */
+	public String getAddToWalletDoneTriggerScript() {
+		return addToWalletDoneTriggerScript;
+	}
+
+	/**
+	 * ウォレットへの加算完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param addToWalletDoneTriggerScript ウォレットへの加算完了時 に実行されるGS2-Script
+	 */
+	public void setAddToWalletDoneTriggerScript(String addToWalletDoneTriggerScript) {
+		this.addToWalletDoneTriggerScript = addToWalletDoneTriggerScript;
+	}
+
+	/**
+	 * ウォレットからの減算時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ウォレットからの減算時 に実行されるGS2-Script
+	 */
+	public String getSubtractFromWalletTriggerScript() {
+		return subtractFromWalletTriggerScript;
+	}
+
+	/**
+	 * ウォレットからの減算時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param subtractFromWalletTriggerScript ウォレットからの減算時 に実行されるGS2-Script
+	 */
+	public void setSubtractFromWalletTriggerScript(String subtractFromWalletTriggerScript) {
+		this.subtractFromWalletTriggerScript = subtractFromWalletTriggerScript;
+	}
+
+	/**
+	 * ウォレットからの減算完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ウォレットからの減算完了時 に実行されるGS2-Script
+	 */
+	public String getSubtractFromWalletDoneTriggerScript() {
+		return subtractFromWalletDoneTriggerScript;
+	}
+
+	/**
+	 * ウォレットからの減算完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param subtractFromWalletDoneTriggerScript ウォレットからの減算完了時 に実行されるGS2-Script
+	 */
+	public void setSubtractFromWalletDoneTriggerScript(String subtractFromWalletDoneTriggerScript) {
+		this.subtractFromWalletDoneTriggerScript = subtractFromWalletDoneTriggerScript;
+	}
+
+	/**
+	 * 作成日時(エポック秒)を取得
+	 *
+	 * @return 作成日時(エポック秒)
+	 */
+	public Integer getCreateAt() {
+		return createAt;
+	}
+
+	/**
+	 * 作成日時(エポック秒)を設定
+	 *
+	 * @param createAt 作成日時(エポック秒)
+	 */
+	public void setCreateAt(Integer createAt) {
+		this.createAt = createAt;
+	}
+
+	/**
+	 * 最終更新日時(エポック秒)を取得
+	 *
+	 * @return 最終更新日時(エポック秒)
+	 */
+	public Integer getUpdateAt() {
+		return updateAt;
+	}
+
+	/**
+	 * 最終更新日時(エポック秒)を設定
+	 *
+	 * @param updateAt 最終更新日時(エポック秒)
+	 */
+	public void setUpdateAt(Integer updateAt) {
+		this.updateAt = updateAt;
 	}
 
 }
