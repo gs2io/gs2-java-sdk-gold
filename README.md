@@ -1,2 +1,2 @@
-gs2-java-sdk-inbox
+gs2-java-sdk-gold
 ===============
