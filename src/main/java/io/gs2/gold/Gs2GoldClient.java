@@ -81,6 +81,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				AddToMyWalletRequest.Constant.MODULE,
 				AddToMyWalletRequest.Constant.FUNCTION,
 				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
         post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 
@@ -114,6 +117,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				AddToWalletRequest.Constant.MODULE,
 				AddToWalletRequest.Constant.FUNCTION,
 				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
 
 		return doRequest(post, AddToWalletResult.class);
@@ -139,11 +145,11 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
         if(request.getDescription() != null) body.put("description", request.getDescription());
         if(request.getBalanceMax() != null) body.put("balanceMax", request.getBalanceMax());
-        if(request.getRestrictionType() != null) body.put("restrictionType", request.getRestrictionType());
+        if(request.getResetType() != null) body.put("resetType", request.getResetType());
         if(request.getResetDayOfMonth() != null) body.put("resetDayOfMonth", request.getResetDayOfMonth());
         if(request.getResetDayOfWeek() != null) body.put("resetDayOfWeek", request.getResetDayOfWeek());
         if(request.getResetHour() != null) body.put("resetHour", request.getResetHour());
-        if(request.getPeriodicalLimit() != null) body.put("periodicalLimit", request.getPeriodicalLimit());
+        if(request.getLatestGainMax() != null) body.put("latestGainMax", request.getLatestGainMax());
         if(request.getNotificationUrl() != null) body.put("notificationUrl", request.getNotificationUrl());
         if(request.getCreateWalletTriggerScript() != null) body.put("createWalletTriggerScript", request.getCreateWalletTriggerScript());
         if(request.getCreateWalletDoneTriggerScript() != null) body.put("createWalletDoneTriggerScript", request.getCreateWalletDoneTriggerScript());
@@ -158,6 +164,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				CreateGoldRequest.Constant.MODULE,
 				CreateGoldRequest.Constant.FUNCTION,
 				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
 
 		return doRequest(post, CreateGoldResult.class);
@@ -185,6 +194,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				ENDPOINT,
 				DeleteGoldRequest.Constant.MODULE,
 				DeleteGoldRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            delete.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
 
 		doRequest(delete, null);
@@ -220,6 +232,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				ENDPOINT,
 				DescribeGoldRequest.Constant.MODULE,
 				DescribeGoldRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
 
 		return doRequest(get, DescribeGoldResult.class);
@@ -249,45 +264,12 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				ENDPOINT,
 				DescribeServiceClassRequest.Constant.MODULE,
 				DescribeServiceClassRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
 
 		return doRequest(get, DescribeServiceClassResult.class);
-
-	}
-
-
-	/**
-	 * ウォレットの一覧を取得します<br>
-	 * <br>
-	 * - 消費クオータ: 50件あたり5<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 */
-
-	public void describeWallet(DescribeWalletRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet";
-
-        List<NameValuePair> queryString = new ArrayList<>();
-        if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
-        if(request.getLimit() != null) queryString.add(new BasicNameValuePair("limit", String.valueOf(request.getLimit())));
-
-
-		if(queryString.size() > 0) {
-			url += "?" + URLEncodedUtils.format(queryString, "UTF-8");
-		}
-		HttpGet get = createHttpGet(
-				url,
-				credential,
-				ENDPOINT,
-				DescribeWalletRequest.Constant.MODULE,
-				DescribeWalletRequest.Constant.FUNCTION);
-
-        get.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		doRequest(get, null);
 
 	}
 
@@ -314,6 +296,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				ENDPOINT,
 				GetGoldRequest.Constant.MODULE,
 				GetGoldRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
 
 		return doRequest(get, GetGoldResult.class);
@@ -343,6 +328,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				ENDPOINT,
 				GetGoldStatusRequest.Constant.MODULE,
 				GetGoldStatusRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
 
 		return doRequest(get, GetGoldStatusResult.class);
@@ -374,6 +362,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				ENDPOINT,
 				GetMyWalletRequest.Constant.MODULE,
 				GetMyWalletRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
         get.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 
@@ -406,6 +397,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				ENDPOINT,
 				GetWalletRequest.Constant.MODULE,
 				GetWalletRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
 
 		return doRequest(get, GetWalletResult.class);
@@ -437,6 +431,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				ResetLatestGainRequest.Constant.MODULE,
 				ResetLatestGainRequest.Constant.FUNCTION,
 				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
 
 		return doRequest(post, ResetLatestGainResult.class);
@@ -469,6 +466,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				SubtractFromMyWalletRequest.Constant.MODULE,
 				SubtractFromMyWalletRequest.Constant.FUNCTION,
 				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
         post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 
@@ -502,6 +502,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				SubtractFromWalletRequest.Constant.MODULE,
 				SubtractFromWalletRequest.Constant.FUNCTION,
 				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
 
 		return doRequest(post, SubtractFromWalletResult.class);
@@ -526,11 +529,11 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
         if(request.getDescription() != null) body.put("description", request.getDescription());
         if(request.getBalanceMax() != null) body.put("balanceMax", request.getBalanceMax());
-        if(request.getRestrictionType() != null) body.put("restrictionType", request.getRestrictionType());
+        if(request.getResetType() != null) body.put("resetType", request.getResetType());
         if(request.getResetDayOfMonth() != null) body.put("resetDayOfMonth", request.getResetDayOfMonth());
         if(request.getResetDayOfWeek() != null) body.put("resetDayOfWeek", request.getResetDayOfWeek());
         if(request.getResetHour() != null) body.put("resetHour", request.getResetHour());
-        if(request.getPeriodicalLimit() != null) body.put("periodicalLimit", request.getPeriodicalLimit());
+        if(request.getLatestGainMax() != null) body.put("latestGainMax", request.getLatestGainMax());
         if(request.getNotificationUrl() != null) body.put("notificationUrl", request.getNotificationUrl());
         if(request.getCreateWalletTriggerScript() != null) body.put("createWalletTriggerScript", request.getCreateWalletTriggerScript());
         if(request.getCreateWalletDoneTriggerScript() != null) body.put("createWalletDoneTriggerScript", request.getCreateWalletDoneTriggerScript());
@@ -545,6 +548,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				UpdateGoldRequest.Constant.MODULE,
 				UpdateGoldRequest.Constant.FUNCTION,
 				body.toString());
+        if(request.getRequestId() != null) {
+            put.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
 
 		return doRequest(put, UpdateGoldResult.class);
