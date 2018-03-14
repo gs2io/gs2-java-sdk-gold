@@ -44,7 +44,7 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	private Integer balanceMax;
 
 	/** 取得量の期間制限のタイプ */
-	private String restrictionType;
+	private String resetType;
 
 	/** 期間内の取得量をリセットする日にち */
 	private Integer resetDayOfMonth;
@@ -56,7 +56,7 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	private Integer resetHour;
 
 	/** 期間内の最大取得量 */
-	private Integer periodicalLimit;
+	private Integer latestGainMax;
 
 	/** 通知先 URL */
 	private String notificationUrl;
@@ -201,27 +201,27 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	 *
 	 * @return 取得量の期間制限のタイプ
 	 */
-	public String getRestrictionType() {
-		return restrictionType;
+	public String getResetType() {
+		return resetType;
 	}
 
 	/**
 	 * 取得量の期間制限のタイプを設定
 	 *
-	 * @param restrictionType 取得量の期間制限のタイプ
+	 * @param resetType 取得量の期間制限のタイプ
 	 */
-	public void setRestrictionType(String restrictionType) {
-		this.restrictionType = restrictionType;
+	public void setResetType(String resetType) {
+		this.resetType = resetType;
 	}
 
 	/**
 	 * 取得量の期間制限のタイプを設定
 	 *
-	 * @param restrictionType 取得量の期間制限のタイプ
+	 * @param resetType 取得量の期間制限のタイプ
 	 * @return this
 	 */
-	public CreateGoldRequest withRestrictionType(String restrictionType) {
-		setRestrictionType(restrictionType);
+	public CreateGoldRequest withResetType(String resetType) {
+		setResetType(resetType);
 		return this;
 	}
 
@@ -317,27 +317,27 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	 *
 	 * @return 期間内の最大取得量
 	 */
-	public Integer getPeriodicalLimit() {
-		return periodicalLimit;
+	public Integer getLatestGainMax() {
+		return latestGainMax;
 	}
 
 	/**
 	 * 期間内の最大取得量を設定
 	 *
-	 * @param periodicalLimit 期間内の最大取得量
+	 * @param latestGainMax 期間内の最大取得量
 	 */
-	public void setPeriodicalLimit(Integer periodicalLimit) {
-		this.periodicalLimit = periodicalLimit;
+	public void setLatestGainMax(Integer latestGainMax) {
+		this.latestGainMax = latestGainMax;
 	}
 
 	/**
 	 * 期間内の最大取得量を設定
 	 *
-	 * @param periodicalLimit 期間内の最大取得量
+	 * @param latestGainMax 期間内の最大取得量
 	 * @return this
 	 */
-	public CreateGoldRequest withPeriodicalLimit(Integer periodicalLimit) {
-		setPeriodicalLimit(periodicalLimit);
+	public CreateGoldRequest withLatestGainMax(Integer latestGainMax) {
+		setLatestGainMax(latestGainMax);
 		return this;
 	}
 
