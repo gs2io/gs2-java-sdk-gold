@@ -19,23 +19,20 @@ package io.gs2.gold.control;
 import org.json.JSONObject;
 import java.util.List;
 import io.gs2.gold.Gs2Gold;
-import io.gs2.control.Gs2BasicRequest;
+import io.gs2.control.Gs2UserRequest;
 
 /**
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class AddToWalletRequest extends Gs2BasicRequest<AddToWalletRequest> {
+public class DepositIntoMyWalletRequest extends Gs2UserRequest<DepositIntoMyWalletRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "AddToWallet";
+		public static final String FUNCTION = "DepositIntoMyWallet";
 	}
 
 	/** ゴールドの名前を指定します。 */
 	private String goldName;
-
-	/** ウォレット所有者のユーザIDを指定します。 */
-	private String userId;
 
 	/** 加算量 */
 	private Integer value;
@@ -68,37 +65,8 @@ public class AddToWalletRequest extends Gs2BasicRequest<AddToWalletRequest> {
 	 * @param goldName ゴールドの名前を指定します。
 	 * @return this
 	 */
-	public AddToWalletRequest withGoldName(String goldName) {
+	public DepositIntoMyWalletRequest withGoldName(String goldName) {
 		setGoldName(goldName);
-		return this;
-	}
-
-	/**
-	 * ウォレット所有者のユーザIDを指定します。を取得
-	 *
-	 * @return ウォレット所有者のユーザIDを指定します。
-	 */
-	public String getUserId() {
-		return userId;
-	}
-
-	/**
-	 * ウォレット所有者のユーザIDを指定します。を設定
-	 *
-	 * @param userId ウォレット所有者のユーザIDを指定します。
-	 */
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	/**
-	 * ウォレット所有者のユーザIDを指定します。を設定
-	 *
-	 * @param userId ウォレット所有者のユーザIDを指定します。
-	 * @return this
-	 */
-	public AddToWalletRequest withUserId(String userId) {
-		setUserId(userId);
 		return this;
 	}
 
@@ -126,7 +94,7 @@ public class AddToWalletRequest extends Gs2BasicRequest<AddToWalletRequest> {
 	 * @param value 加算量
 	 * @return this
 	 */
-	public AddToWalletRequest withValue(Integer value) {
+	public DepositIntoMyWalletRequest withValue(Integer value) {
 		setValue(value);
 		return this;
 	}
@@ -155,7 +123,7 @@ public class AddToWalletRequest extends Gs2BasicRequest<AddToWalletRequest> {
 	 * @param context コンテキスト
 	 * @return this
 	 */
-	public AddToWalletRequest withContext(String context) {
+	public DepositIntoMyWalletRequest withContext(String context) {
 		setContext(context);
 		return this;
 	}

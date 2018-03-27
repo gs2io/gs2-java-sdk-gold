@@ -73,16 +73,16 @@ public class Gold implements Serializable {
 	private String createWalletDoneTriggerScript;
 
 	/** ウォレットへの加算時 に実行されるGS2-Script */
-	private String addToWalletTriggerScript;
+	private String depositIntoWalletTriggerScript;
 
 	/** ウォレットへの加算完了時 に実行されるGS2-Script */
-	private String addToWalletDoneTriggerScript;
+	private String depositIntoWalletDoneTriggerScript;
 
 	/** ウォレットからの減算時 に実行されるGS2-Script */
-	private String subtractFromWalletTriggerScript;
+	private String withdrawFromWalletTriggerScript;
 
 	/** ウォレットからの減算完了時 に実行されるGS2-Script */
-	private String subtractFromWalletDoneTriggerScript;
+	private String withdrawFromWalletDoneTriggerScript;
 
 	/** 作成日時(エポック秒) */
 	private Integer createAt;
@@ -348,17 +348,17 @@ public class Gold implements Serializable {
 	 *
 	 * @return ウォレットへの加算時 に実行されるGS2-Script
 	 */
-	public String getAddToWalletTriggerScript() {
-		return addToWalletTriggerScript;
+	public String getDepositIntoWalletTriggerScript() {
+		return depositIntoWalletTriggerScript;
 	}
 
 	/**
 	 * ウォレットへの加算時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param addToWalletTriggerScript ウォレットへの加算時 に実行されるGS2-Script
+	 * @param depositIntoWalletTriggerScript ウォレットへの加算時 に実行されるGS2-Script
 	 */
-	public void setAddToWalletTriggerScript(String addToWalletTriggerScript) {
-		this.addToWalletTriggerScript = addToWalletTriggerScript;
+	public void setDepositIntoWalletTriggerScript(String depositIntoWalletTriggerScript) {
+		this.depositIntoWalletTriggerScript = depositIntoWalletTriggerScript;
 	}
 
 	/**
@@ -366,17 +366,17 @@ public class Gold implements Serializable {
 	 *
 	 * @return ウォレットへの加算完了時 に実行されるGS2-Script
 	 */
-	public String getAddToWalletDoneTriggerScript() {
-		return addToWalletDoneTriggerScript;
+	public String getDepositIntoWalletDoneTriggerScript() {
+		return depositIntoWalletDoneTriggerScript;
 	}
 
 	/**
 	 * ウォレットへの加算完了時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param addToWalletDoneTriggerScript ウォレットへの加算完了時 に実行されるGS2-Script
+	 * @param depositIntoWalletDoneTriggerScript ウォレットへの加算完了時 に実行されるGS2-Script
 	 */
-	public void setAddToWalletDoneTriggerScript(String addToWalletDoneTriggerScript) {
-		this.addToWalletDoneTriggerScript = addToWalletDoneTriggerScript;
+	public void setDepositIntoWalletDoneTriggerScript(String depositIntoWalletDoneTriggerScript) {
+		this.depositIntoWalletDoneTriggerScript = depositIntoWalletDoneTriggerScript;
 	}
 
 	/**
@@ -384,17 +384,17 @@ public class Gold implements Serializable {
 	 *
 	 * @return ウォレットからの減算時 に実行されるGS2-Script
 	 */
-	public String getSubtractFromWalletTriggerScript() {
-		return subtractFromWalletTriggerScript;
+	public String getWithdrawFromWalletTriggerScript() {
+		return withdrawFromWalletTriggerScript;
 	}
 
 	/**
 	 * ウォレットからの減算時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param subtractFromWalletTriggerScript ウォレットからの減算時 に実行されるGS2-Script
+	 * @param withdrawFromWalletTriggerScript ウォレットからの減算時 に実行されるGS2-Script
 	 */
-	public void setSubtractFromWalletTriggerScript(String subtractFromWalletTriggerScript) {
-		this.subtractFromWalletTriggerScript = subtractFromWalletTriggerScript;
+	public void setWithdrawFromWalletTriggerScript(String withdrawFromWalletTriggerScript) {
+		this.withdrawFromWalletTriggerScript = withdrawFromWalletTriggerScript;
 	}
 
 	/**
@@ -402,17 +402,17 @@ public class Gold implements Serializable {
 	 *
 	 * @return ウォレットからの減算完了時 に実行されるGS2-Script
 	 */
-	public String getSubtractFromWalletDoneTriggerScript() {
-		return subtractFromWalletDoneTriggerScript;
+	public String getWithdrawFromWalletDoneTriggerScript() {
+		return withdrawFromWalletDoneTriggerScript;
 	}
 
 	/**
 	 * ウォレットからの減算完了時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param subtractFromWalletDoneTriggerScript ウォレットからの減算完了時 に実行されるGS2-Script
+	 * @param withdrawFromWalletDoneTriggerScript ウォレットからの減算完了時 に実行されるGS2-Script
 	 */
-	public void setSubtractFromWalletDoneTriggerScript(String subtractFromWalletDoneTriggerScript) {
-		this.subtractFromWalletDoneTriggerScript = subtractFromWalletDoneTriggerScript;
+	public void setWithdrawFromWalletDoneTriggerScript(String withdrawFromWalletDoneTriggerScript) {
+		this.withdrawFromWalletDoneTriggerScript = withdrawFromWalletDoneTriggerScript;
 	}
 
 	/**

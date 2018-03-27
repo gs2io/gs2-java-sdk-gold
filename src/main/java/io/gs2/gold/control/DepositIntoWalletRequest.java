@@ -25,10 +25,10 @@ import io.gs2.control.Gs2BasicRequest;
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class SubtractFromWalletRequest extends Gs2BasicRequest<SubtractFromWalletRequest> {
+public class DepositIntoWalletRequest extends Gs2BasicRequest<DepositIntoWalletRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "SubtractFromWallet";
+		public static final String FUNCTION = "DepositIntoWallet";
 	}
 
 	/** ゴールドの名前を指定します。 */
@@ -37,7 +37,7 @@ public class SubtractFromWalletRequest extends Gs2BasicRequest<SubtractFromWalle
 	/** ウォレット所有者のユーザIDを指定します。 */
 	private String userId;
 
-	/** 減算量 */
+	/** 加算量 */
 	private Integer value;
 
 	/** コンテキスト */
@@ -68,7 +68,7 @@ public class SubtractFromWalletRequest extends Gs2BasicRequest<SubtractFromWalle
 	 * @param goldName ゴールドの名前を指定します。
 	 * @return this
 	 */
-	public SubtractFromWalletRequest withGoldName(String goldName) {
+	public DepositIntoWalletRequest withGoldName(String goldName) {
 		setGoldName(goldName);
 		return this;
 	}
@@ -97,36 +97,36 @@ public class SubtractFromWalletRequest extends Gs2BasicRequest<SubtractFromWalle
 	 * @param userId ウォレット所有者のユーザIDを指定します。
 	 * @return this
 	 */
-	public SubtractFromWalletRequest withUserId(String userId) {
+	public DepositIntoWalletRequest withUserId(String userId) {
 		setUserId(userId);
 		return this;
 	}
 
 	/**
-	 * 減算量を取得
+	 * 加算量を取得
 	 *
-	 * @return 減算量
+	 * @return 加算量
 	 */
 	public Integer getValue() {
 		return value;
 	}
 
 	/**
-	 * 減算量を設定
+	 * 加算量を設定
 	 *
-	 * @param value 減算量
+	 * @param value 加算量
 	 */
 	public void setValue(Integer value) {
 		this.value = value;
 	}
 
 	/**
-	 * 減算量を設定
+	 * 加算量を設定
 	 *
-	 * @param value 減算量
+	 * @param value 加算量
 	 * @return this
 	 */
-	public SubtractFromWalletRequest withValue(Integer value) {
+	public DepositIntoWalletRequest withValue(Integer value) {
 		setValue(value);
 		return this;
 	}
@@ -155,7 +155,7 @@ public class SubtractFromWalletRequest extends Gs2BasicRequest<SubtractFromWalle
 	 * @param context コンテキスト
 	 * @return this
 	 */
-	public SubtractFromWalletRequest withContext(String context) {
+	public DepositIntoWalletRequest withContext(String context) {
 		setContext(context);
 		return this;
 	}

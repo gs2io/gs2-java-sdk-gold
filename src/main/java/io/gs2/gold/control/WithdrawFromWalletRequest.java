@@ -19,22 +19,25 @@ package io.gs2.gold.control;
 import org.json.JSONObject;
 import java.util.List;
 import io.gs2.gold.Gs2Gold;
-import io.gs2.control.Gs2UserRequest;
+import io.gs2.control.Gs2BasicRequest;
 
 /**
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class AddToMyWalletRequest extends Gs2UserRequest<AddToMyWalletRequest> {
+public class WithdrawFromWalletRequest extends Gs2BasicRequest<WithdrawFromWalletRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "AddToMyWallet";
+		public static final String FUNCTION = "WithdrawFromWallet";
 	}
 
 	/** ゴールドの名前を指定します。 */
 	private String goldName;
 
-	/** 加算量 */
+	/** ウォレット所有者のユーザIDを指定します。 */
+	private String userId;
+
+	/** 減算量 */
 	private Integer value;
 
 	/** コンテキスト */
@@ -65,36 +68,65 @@ public class AddToMyWalletRequest extends Gs2UserRequest<AddToMyWalletRequest> {
 	 * @param goldName ゴールドの名前を指定します。
 	 * @return this
 	 */
-	public AddToMyWalletRequest withGoldName(String goldName) {
+	public WithdrawFromWalletRequest withGoldName(String goldName) {
 		setGoldName(goldName);
 		return this;
 	}
 
 	/**
-	 * 加算量を取得
+	 * ウォレット所有者のユーザIDを指定します。を取得
 	 *
-	 * @return 加算量
+	 * @return ウォレット所有者のユーザIDを指定します。
+	 */
+	public String getUserId() {
+		return userId;
+	}
+
+	/**
+	 * ウォレット所有者のユーザIDを指定します。を設定
+	 *
+	 * @param userId ウォレット所有者のユーザIDを指定します。
+	 */
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	/**
+	 * ウォレット所有者のユーザIDを指定します。を設定
+	 *
+	 * @param userId ウォレット所有者のユーザIDを指定します。
+	 * @return this
+	 */
+	public WithdrawFromWalletRequest withUserId(String userId) {
+		setUserId(userId);
+		return this;
+	}
+
+	/**
+	 * 減算量を取得
+	 *
+	 * @return 減算量
 	 */
 	public Integer getValue() {
 		return value;
 	}
 
 	/**
-	 * 加算量を設定
+	 * 減算量を設定
 	 *
-	 * @param value 加算量
+	 * @param value 減算量
 	 */
 	public void setValue(Integer value) {
 		this.value = value;
 	}
 
 	/**
-	 * 加算量を設定
+	 * 減算量を設定
 	 *
-	 * @param value 加算量
+	 * @param value 減算量
 	 * @return this
 	 */
-	public AddToMyWalletRequest withValue(Integer value) {
+	public WithdrawFromWalletRequest withValue(Integer value) {
 		setValue(value);
 		return this;
 	}
@@ -123,7 +155,7 @@ public class AddToMyWalletRequest extends Gs2UserRequest<AddToMyWalletRequest> {
 	 * @param context コンテキスト
 	 * @return this
 	 */
-	public AddToMyWalletRequest withContext(String context) {
+	public WithdrawFromWalletRequest withContext(String context) {
 		setContext(context);
 		return this;
 	}

@@ -25,7 +25,7 @@ import io.gs2.gold.model.*;
  * @author Game Server Services, Inc.
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class AddToMyWalletResult {
+public class DepositIntoMyWalletResult {
 
 	/** ウォレット */
 	private Wallet item;
