@@ -28,7 +28,7 @@ import io.gs2.control.Gs2UserRequest;
 public class GetMyWalletRequest extends Gs2UserRequest<GetMyWalletRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "GetWallet";
+		public static final String FUNCTION = "GetMyWallet";
 	}
 
 	/** ゴールドの名前を指定します。 */
