@@ -408,6 +408,40 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 
 	/**
+	 * ウォレットの設定を取得します<br>
+	 * <br>
+	 * - 消費クオータ: 5<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public GetWalletSettingsResult getWalletSettings(GetWalletSettingsRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/settings";
+
+
+
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				GetWalletSettingsRequest.Constant.MODULE,
+				GetWalletSettingsRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(get, GetWalletSettingsResult.class);
+
+	}
+
+
+	/**
 	 * ウォレットの残高を加算します<br>
 	 * <br>
 	 * - 消費クオータ: 10<br>
