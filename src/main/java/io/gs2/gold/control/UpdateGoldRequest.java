@@ -41,7 +41,7 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	private String serviceClass;
 
 	/** 各ウォレットの残高の最大値 */
-	private Integer balanceMax;
+	private Long balanceMax;
 
 	/** 取得量の期間制限のタイプ */
 	private String resetType;
@@ -172,7 +172,7 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	 *
 	 * @return 各ウォレットの残高の最大値
 	 */
-	public Integer getBalanceMax() {
+	public Long getBalanceMax() {
 		return balanceMax;
 	}
 
@@ -181,7 +181,7 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	 *
 	 * @param balanceMax 各ウォレットの残高の最大値
 	 */
-	public void setBalanceMax(Integer balanceMax) {
+	public void setBalanceMax(Long balanceMax) {
 		this.balanceMax = balanceMax;
 	}
 
@@ -191,7 +191,7 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	 * @param balanceMax 各ウォレットの残高の最大値
 	 * @return this
 	 */
-	public UpdateGoldRequest withBalanceMax(Integer balanceMax) {
+	public UpdateGoldRequest withBalanceMax(Long balanceMax) {
 		setBalanceMax(balanceMax);
 		return this;
 	}

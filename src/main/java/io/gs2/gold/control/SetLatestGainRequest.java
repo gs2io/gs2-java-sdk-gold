@@ -25,10 +25,10 @@ import io.gs2.control.Gs2BasicRequest;
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class ResetLatestGainRequest extends Gs2BasicRequest<ResetLatestGainRequest> {
+public class SetLatestGainRequest extends Gs2BasicRequest<SetLatestGainRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "ResetLatestGain";
+		public static final String FUNCTION = "SetLatestGain";
 	}
 
 	/** ゴールドの名前を指定します。 */
@@ -38,7 +38,7 @@ public class ResetLatestGainRequest extends Gs2BasicRequest<ResetLatestGainReque
 	private String userId;
 
 	/** 期間内の取得量 */
-	private Integer value;
+	private Long value;
 
 
 	/**
@@ -65,7 +65,7 @@ public class ResetLatestGainRequest extends Gs2BasicRequest<ResetLatestGainReque
 	 * @param goldName ゴールドの名前を指定します。
 	 * @return this
 	 */
-	public ResetLatestGainRequest withGoldName(String goldName) {
+	public SetLatestGainRequest withGoldName(String goldName) {
 		setGoldName(goldName);
 		return this;
 	}
@@ -94,7 +94,7 @@ public class ResetLatestGainRequest extends Gs2BasicRequest<ResetLatestGainReque
 	 * @param userId ウォレット所有者のユーザIDを指定します。
 	 * @return this
 	 */
-	public ResetLatestGainRequest withUserId(String userId) {
+	public SetLatestGainRequest withUserId(String userId) {
 		setUserId(userId);
 		return this;
 	}
@@ -104,7 +104,7 @@ public class ResetLatestGainRequest extends Gs2BasicRequest<ResetLatestGainReque
 	 *
 	 * @return 期間内の取得量
 	 */
-	public Integer getValue() {
+	public Long getValue() {
 		return value;
 	}
 
@@ -113,7 +113,7 @@ public class ResetLatestGainRequest extends Gs2BasicRequest<ResetLatestGainReque
 	 *
 	 * @param value 期間内の取得量
 	 */
-	public void setValue(Integer value) {
+	public void setValue(Long value) {
 		this.value = value;
 	}
 
@@ -123,7 +123,7 @@ public class ResetLatestGainRequest extends Gs2BasicRequest<ResetLatestGainReque
 	 * @param value 期間内の取得量
 	 * @return this
 	 */
-	public ResetLatestGainRequest withValue(Integer value) {
+	public SetLatestGainRequest withValue(Long value) {
 		setValue(value);
 		return this;
 	}

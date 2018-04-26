@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class WalletSettings implements Serializable {
 
 	/** 各ウォレットの残高の最大値 */
-	private Integer balanceMax;
+	private Long balanceMax;
 
 	/** 取得量の期間制限のタイプ */
 	private String resetType;
@@ -46,7 +46,7 @@ public class WalletSettings implements Serializable {
 	private Integer resetHour;
 
 	/** 期間内の最大取得量 */
-	private Integer latestGainMax;
+	private Long latestGainMax;
 
 	/** 作成日時(エポック秒) */
 	private Integer createAt;
@@ -60,7 +60,7 @@ public class WalletSettings implements Serializable {
 	 *
 	 * @return 各ウォレットの残高の最大値
 	 */
-	public Integer getBalanceMax() {
+	public Long getBalanceMax() {
 		return balanceMax;
 	}
 
@@ -69,7 +69,7 @@ public class WalletSettings implements Serializable {
 	 *
 	 * @param balanceMax 各ウォレットの残高の最大値
 	 */
-	public void setBalanceMax(Integer balanceMax) {
+	public void setBalanceMax(Long balanceMax) {
 		this.balanceMax = balanceMax;
 	}
 
@@ -150,7 +150,7 @@ public class WalletSettings implements Serializable {
 	 *
 	 * @return 期間内の最大取得量
 	 */
-	public Integer getLatestGainMax() {
+	public Long getLatestGainMax() {
 		return latestGainMax;
 	}
 
@@ -159,7 +159,7 @@ public class WalletSettings implements Serializable {
 	 *
 	 * @param latestGainMax 期間内の最大取得量
 	 */
-	public void setLatestGainMax(Integer latestGainMax) {
+	public void setLatestGainMax(Long latestGainMax) {
 		this.latestGainMax = latestGainMax;
 	}
 

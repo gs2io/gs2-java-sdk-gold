@@ -35,7 +35,7 @@ public class WithdrawFromMyWalletRequest extends Gs2UserRequest<WithdrawFromMyWa
 	private String goldName;
 
 	/** 減算量 */
-	private Integer value;
+	private Long value;
 
 	/** コンテキスト */
 	private String context;
@@ -75,7 +75,7 @@ public class WithdrawFromMyWalletRequest extends Gs2UserRequest<WithdrawFromMyWa
 	 *
 	 * @return 減算量
 	 */
-	public Integer getValue() {
+	public Long getValue() {
 		return value;
 	}
 
@@ -84,7 +84,7 @@ public class WithdrawFromMyWalletRequest extends Gs2UserRequest<WithdrawFromMyWa
 	 *
 	 * @param value 減算量
 	 */
-	public void setValue(Integer value) {
+	public void setValue(Long value) {
 		this.value = value;
 	}
 
@@ -94,7 +94,7 @@ public class WithdrawFromMyWalletRequest extends Gs2UserRequest<WithdrawFromMyWa
 	 * @param value 減算量
 	 * @return this
 	 */
-	public WithdrawFromMyWalletRequest withValue(Integer value) {
+	public WithdrawFromMyWalletRequest withValue(Long value) {
 		setValue(value);
 		return this;
 	}

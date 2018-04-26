@@ -38,7 +38,7 @@ public class WithdrawFromWalletRequest extends Gs2BasicRequest<WithdrawFromWalle
 	private String userId;
 
 	/** 減算量 */
-	private Integer value;
+	private Long value;
 
 	/** コンテキスト */
 	private String context;
@@ -107,7 +107,7 @@ public class WithdrawFromWalletRequest extends Gs2BasicRequest<WithdrawFromWalle
 	 *
 	 * @return 減算量
 	 */
-	public Integer getValue() {
+	public Long getValue() {
 		return value;
 	}
 
@@ -116,7 +116,7 @@ public class WithdrawFromWalletRequest extends Gs2BasicRequest<WithdrawFromWalle
 	 *
 	 * @param value 減算量
 	 */
-	public void setValue(Integer value) {
+	public void setValue(Long value) {
 		this.value = value;
 	}
 
@@ -126,7 +126,7 @@ public class WithdrawFromWalletRequest extends Gs2BasicRequest<WithdrawFromWalle
 	 * @param value 減算量
 	 * @return this
 	 */
-	public WithdrawFromWalletRequest withValue(Integer value) {
+	public WithdrawFromWalletRequest withValue(Long value) {
 		setValue(value);
 		return this;
 	}

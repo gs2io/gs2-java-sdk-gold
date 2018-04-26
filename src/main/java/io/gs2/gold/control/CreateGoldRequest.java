@@ -41,7 +41,7 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	private String serviceClass;
 
 	/** 各ウォレットの残高の最大値 */
-	private Integer balanceMax;
+	private Long balanceMax;
 
 	/** 取得量の期間制限のタイプ */
 	private String resetType;
@@ -56,7 +56,7 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	private Integer resetHour;
 
 	/** 期間内の最大取得量 */
-	private Integer latestGainMax;
+	private Long latestGainMax;
 
 	/** 通知先 URL */
 	private String notificationUrl;
@@ -172,7 +172,7 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	 *
 	 * @return 各ウォレットの残高の最大値
 	 */
-	public Integer getBalanceMax() {
+	public Long getBalanceMax() {
 		return balanceMax;
 	}
 
@@ -181,7 +181,7 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	 *
 	 * @param balanceMax 各ウォレットの残高の最大値
 	 */
-	public void setBalanceMax(Integer balanceMax) {
+	public void setBalanceMax(Long balanceMax) {
 		this.balanceMax = balanceMax;
 	}
 
@@ -191,7 +191,7 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	 * @param balanceMax 各ウォレットの残高の最大値
 	 * @return this
 	 */
-	public CreateGoldRequest withBalanceMax(Integer balanceMax) {
+	public CreateGoldRequest withBalanceMax(Long balanceMax) {
 		setBalanceMax(balanceMax);
 		return this;
 	}
@@ -317,7 +317,7 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	 *
 	 * @return 期間内の最大取得量
 	 */
-	public Integer getLatestGainMax() {
+	public Long getLatestGainMax() {
 		return latestGainMax;
 	}
 
@@ -326,7 +326,7 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	 *
 	 * @param latestGainMax 期間内の最大取得量
 	 */
-	public void setLatestGainMax(Integer latestGainMax) {
+	public void setLatestGainMax(Long latestGainMax) {
 		this.latestGainMax = latestGainMax;
 	}
 
@@ -336,7 +336,7 @@ public class CreateGoldRequest extends Gs2BasicRequest<CreateGoldRequest> {
 	 * @param latestGainMax 期間内の最大取得量
 	 * @return this
 	 */
-	public CreateGoldRequest withLatestGainMax(Integer latestGainMax) {
+	public CreateGoldRequest withLatestGainMax(Long latestGainMax) {
 		setLatestGainMax(latestGainMax);
 		return this;
 	}

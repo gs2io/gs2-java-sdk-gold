@@ -35,7 +35,7 @@ public class DepositIntoMyWalletRequest extends Gs2UserRequest<DepositIntoMyWall
 	private String goldName;
 
 	/** 加算量 */
-	private Integer value;
+	private Long value;
 
 	/** コンテキスト */
 	private String context;
@@ -75,7 +75,7 @@ public class DepositIntoMyWalletRequest extends Gs2UserRequest<DepositIntoMyWall
 	 *
 	 * @return 加算量
 	 */
-	public Integer getValue() {
+	public Long getValue() {
 		return value;
 	}
 
@@ -84,7 +84,7 @@ public class DepositIntoMyWalletRequest extends Gs2UserRequest<DepositIntoMyWall
 	 *
 	 * @param value 加算量
 	 */
-	public void setValue(Integer value) {
+	public void setValue(Long value) {
 		this.value = value;
 	}
 
@@ -94,7 +94,7 @@ public class DepositIntoMyWalletRequest extends Gs2UserRequest<DepositIntoMyWall
 	 * @param value 加算量
 	 * @return this
 	 */
-	public DepositIntoMyWalletRequest withValue(Integer value) {
+	public DepositIntoMyWalletRequest withValue(Long value) {
 		setValue(value);
 		return this;
 	}

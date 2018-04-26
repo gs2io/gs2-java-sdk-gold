@@ -46,7 +46,7 @@ public class Gold implements Serializable {
 	private String serviceClass;
 
 	/** 各ウォレットの残高の最大値 */
-	private Integer balanceMax;
+	private Long balanceMax;
 
 	/** 取得量の期間制限のタイプ */
 	private String resetType;
@@ -61,7 +61,7 @@ public class Gold implements Serializable {
 	private Integer resetHour;
 
 	/** 期間内の最大取得量 */
-	private Integer latestGainMax;
+	private Long latestGainMax;
 
 	/** 通知先 URL */
 	private String notificationUrl;
@@ -186,7 +186,7 @@ public class Gold implements Serializable {
 	 *
 	 * @return 各ウォレットの残高の最大値
 	 */
-	public Integer getBalanceMax() {
+	public Long getBalanceMax() {
 		return balanceMax;
 	}
 
@@ -195,7 +195,7 @@ public class Gold implements Serializable {
 	 *
 	 * @param balanceMax 各ウォレットの残高の最大値
 	 */
-	public void setBalanceMax(Integer balanceMax) {
+	public void setBalanceMax(Long balanceMax) {
 		this.balanceMax = balanceMax;
 	}
 
@@ -276,7 +276,7 @@ public class Gold implements Serializable {
 	 *
 	 * @return 期間内の最大取得量
 	 */
-	public Integer getLatestGainMax() {
+	public Long getLatestGainMax() {
 		return latestGainMax;
 	}
 
@@ -285,7 +285,7 @@ public class Gold implements Serializable {
 	 *
 	 * @param latestGainMax 期間内の最大取得量
 	 */
-	public void setLatestGainMax(Integer latestGainMax) {
+	public void setLatestGainMax(Long latestGainMax) {
 		this.latestGainMax = latestGainMax;
 	}
 

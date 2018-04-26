@@ -38,7 +38,7 @@ public class DepositIntoWalletRequest extends Gs2BasicRequest<DepositIntoWalletR
 	private String userId;
 
 	/** 加算量 */
-	private Integer value;
+	private Long value;
 
 	/** コンテキスト */
 	private String context;
@@ -107,7 +107,7 @@ public class DepositIntoWalletRequest extends Gs2BasicRequest<DepositIntoWalletR
 	 *
 	 * @return 加算量
 	 */
-	public Integer getValue() {
+	public Long getValue() {
 		return value;
 	}
 
@@ -116,7 +116,7 @@ public class DepositIntoWalletRequest extends Gs2BasicRequest<DepositIntoWalletR
 	 *
 	 * @param value 加算量
 	 */
-	public void setValue(Integer value) {
+	public void setValue(Long value) {
 		this.value = value;
 	}
 
@@ -126,7 +126,7 @@ public class DepositIntoWalletRequest extends Gs2BasicRequest<DepositIntoWalletR
 	 * @param value 加算量
 	 * @return this
 	 */
-	public DepositIntoWalletRequest withValue(Integer value) {
+	public DepositIntoWalletRequest withValue(Long value) {
 		setValue(value);
 		return this;
 	}
