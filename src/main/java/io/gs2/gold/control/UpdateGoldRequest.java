@@ -56,7 +56,7 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	private Integer resetHour;
 
 	/** 期間内の最大取得量 */
-	private Integer latestGainMax;
+	private Long latestGainMax;
 
 	/** 通知先 URL */
 	private String notificationUrl;
@@ -317,7 +317,7 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	 *
 	 * @return 期間内の最大取得量
 	 */
-	public Integer getLatestGainMax() {
+	public Long getLatestGainMax() {
 		return latestGainMax;
 	}
 
@@ -326,7 +326,7 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	 *
 	 * @param latestGainMax 期間内の最大取得量
 	 */
-	public void setLatestGainMax(Integer latestGainMax) {
+	public void setLatestGainMax(Long latestGainMax) {
 		this.latestGainMax = latestGainMax;
 	}
 
@@ -336,7 +336,7 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	 * @param latestGainMax 期間内の最大取得量
 	 * @return this
 	 */
-	public UpdateGoldRequest withLatestGainMax(Integer latestGainMax) {
+	public UpdateGoldRequest withLatestGainMax(Long latestGainMax) {
 		setLatestGainMax(latestGainMax);
 		return this;
 	}
