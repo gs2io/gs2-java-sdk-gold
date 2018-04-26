@@ -41,7 +41,7 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	private String serviceClass;
 
 	/** 各ウォレットの残高の最大値 */
-	private Integer balanceMax;
+	private Long balanceMax;
 
 	/** 取得量の期間制限のタイプ */
 	private String resetType;
@@ -68,16 +68,16 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	private String createWalletDoneTriggerScript;
 
 	/** ウォレットへの加算時 に実行されるGS2-Script */
-	private String addToWalletTriggerScript;
+	private String depositIntoWalletTriggerScript;
 
 	/** ウォレットへの加算完了時 に実行されるGS2-Script */
-	private String addToWalletDoneTriggerScript;
+	private String depositIntoWalletDoneTriggerScript;
 
 	/** ウォレットからの減算時 に実行されるGS2-Script */
-	private String subtractFromWalletTriggerScript;
+	private String withdrawFromWalletTriggerScript;
 
 	/** ウォレットからの減算完了時 に実行されるGS2-Script */
-	private String subtractFromWalletDoneTriggerScript;
+	private String withdrawFromWalletDoneTriggerScript;
 
 
 	/**
@@ -172,7 +172,7 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	 *
 	 * @return 各ウォレットの残高の最大値
 	 */
-	public Integer getBalanceMax() {
+	public Long getBalanceMax() {
 		return balanceMax;
 	}
 
@@ -181,7 +181,7 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	 *
 	 * @param balanceMax 各ウォレットの残高の最大値
 	 */
-	public void setBalanceMax(Integer balanceMax) {
+	public void setBalanceMax(Long balanceMax) {
 		this.balanceMax = balanceMax;
 	}
 
@@ -191,7 +191,7 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	 * @param balanceMax 各ウォレットの残高の最大値
 	 * @return this
 	 */
-	public UpdateGoldRequest withBalanceMax(Integer balanceMax) {
+	public UpdateGoldRequest withBalanceMax(Long balanceMax) {
 		setBalanceMax(balanceMax);
 		return this;
 	}
@@ -433,27 +433,27 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	 *
 	 * @return ウォレットへの加算時 に実行されるGS2-Script
 	 */
-	public String getAddToWalletTriggerScript() {
-		return addToWalletTriggerScript;
+	public String getDepositIntoWalletTriggerScript() {
+		return depositIntoWalletTriggerScript;
 	}
 
 	/**
 	 * ウォレットへの加算時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param addToWalletTriggerScript ウォレットへの加算時 に実行されるGS2-Script
+	 * @param depositIntoWalletTriggerScript ウォレットへの加算時 に実行されるGS2-Script
 	 */
-	public void setAddToWalletTriggerScript(String addToWalletTriggerScript) {
-		this.addToWalletTriggerScript = addToWalletTriggerScript;
+	public void setDepositIntoWalletTriggerScript(String depositIntoWalletTriggerScript) {
+		this.depositIntoWalletTriggerScript = depositIntoWalletTriggerScript;
 	}
 
 	/**
 	 * ウォレットへの加算時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param addToWalletTriggerScript ウォレットへの加算時 に実行されるGS2-Script
+	 * @param depositIntoWalletTriggerScript ウォレットへの加算時 に実行されるGS2-Script
 	 * @return this
 	 */
-	public UpdateGoldRequest withAddToWalletTriggerScript(String addToWalletTriggerScript) {
-		setAddToWalletTriggerScript(addToWalletTriggerScript);
+	public UpdateGoldRequest withDepositIntoWalletTriggerScript(String depositIntoWalletTriggerScript) {
+		setDepositIntoWalletTriggerScript(depositIntoWalletTriggerScript);
 		return this;
 	}
 
@@ -462,27 +462,27 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	 *
 	 * @return ウォレットへの加算完了時 に実行されるGS2-Script
 	 */
-	public String getAddToWalletDoneTriggerScript() {
-		return addToWalletDoneTriggerScript;
+	public String getDepositIntoWalletDoneTriggerScript() {
+		return depositIntoWalletDoneTriggerScript;
 	}
 
 	/**
 	 * ウォレットへの加算完了時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param addToWalletDoneTriggerScript ウォレットへの加算完了時 に実行されるGS2-Script
+	 * @param depositIntoWalletDoneTriggerScript ウォレットへの加算完了時 に実行されるGS2-Script
 	 */
-	public void setAddToWalletDoneTriggerScript(String addToWalletDoneTriggerScript) {
-		this.addToWalletDoneTriggerScript = addToWalletDoneTriggerScript;
+	public void setDepositIntoWalletDoneTriggerScript(String depositIntoWalletDoneTriggerScript) {
+		this.depositIntoWalletDoneTriggerScript = depositIntoWalletDoneTriggerScript;
 	}
 
 	/**
 	 * ウォレットへの加算完了時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param addToWalletDoneTriggerScript ウォレットへの加算完了時 に実行されるGS2-Script
+	 * @param depositIntoWalletDoneTriggerScript ウォレットへの加算完了時 に実行されるGS2-Script
 	 * @return this
 	 */
-	public UpdateGoldRequest withAddToWalletDoneTriggerScript(String addToWalletDoneTriggerScript) {
-		setAddToWalletDoneTriggerScript(addToWalletDoneTriggerScript);
+	public UpdateGoldRequest withDepositIntoWalletDoneTriggerScript(String depositIntoWalletDoneTriggerScript) {
+		setDepositIntoWalletDoneTriggerScript(depositIntoWalletDoneTriggerScript);
 		return this;
 	}
 
@@ -491,27 +491,27 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	 *
 	 * @return ウォレットからの減算時 に実行されるGS2-Script
 	 */
-	public String getSubtractFromWalletTriggerScript() {
-		return subtractFromWalletTriggerScript;
+	public String getWithdrawFromWalletTriggerScript() {
+		return withdrawFromWalletTriggerScript;
 	}
 
 	/**
 	 * ウォレットからの減算時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param subtractFromWalletTriggerScript ウォレットからの減算時 に実行されるGS2-Script
+	 * @param withdrawFromWalletTriggerScript ウォレットからの減算時 に実行されるGS2-Script
 	 */
-	public void setSubtractFromWalletTriggerScript(String subtractFromWalletTriggerScript) {
-		this.subtractFromWalletTriggerScript = subtractFromWalletTriggerScript;
+	public void setWithdrawFromWalletTriggerScript(String withdrawFromWalletTriggerScript) {
+		this.withdrawFromWalletTriggerScript = withdrawFromWalletTriggerScript;
 	}
 
 	/**
 	 * ウォレットからの減算時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param subtractFromWalletTriggerScript ウォレットからの減算時 に実行されるGS2-Script
+	 * @param withdrawFromWalletTriggerScript ウォレットからの減算時 に実行されるGS2-Script
 	 * @return this
 	 */
-	public UpdateGoldRequest withSubtractFromWalletTriggerScript(String subtractFromWalletTriggerScript) {
-		setSubtractFromWalletTriggerScript(subtractFromWalletTriggerScript);
+	public UpdateGoldRequest withWithdrawFromWalletTriggerScript(String withdrawFromWalletTriggerScript) {
+		setWithdrawFromWalletTriggerScript(withdrawFromWalletTriggerScript);
 		return this;
 	}
 
@@ -520,27 +520,27 @@ public class UpdateGoldRequest extends Gs2BasicRequest<UpdateGoldRequest> {
 	 *
 	 * @return ウォレットからの減算完了時 に実行されるGS2-Script
 	 */
-	public String getSubtractFromWalletDoneTriggerScript() {
-		return subtractFromWalletDoneTriggerScript;
+	public String getWithdrawFromWalletDoneTriggerScript() {
+		return withdrawFromWalletDoneTriggerScript;
 	}
 
 	/**
 	 * ウォレットからの減算完了時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param subtractFromWalletDoneTriggerScript ウォレットからの減算完了時 に実行されるGS2-Script
+	 * @param withdrawFromWalletDoneTriggerScript ウォレットからの減算完了時 に実行されるGS2-Script
 	 */
-	public void setSubtractFromWalletDoneTriggerScript(String subtractFromWalletDoneTriggerScript) {
-		this.subtractFromWalletDoneTriggerScript = subtractFromWalletDoneTriggerScript;
+	public void setWithdrawFromWalletDoneTriggerScript(String withdrawFromWalletDoneTriggerScript) {
+		this.withdrawFromWalletDoneTriggerScript = withdrawFromWalletDoneTriggerScript;
 	}
 
 	/**
 	 * ウォレットからの減算完了時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param subtractFromWalletDoneTriggerScript ウォレットからの減算完了時 に実行されるGS2-Script
+	 * @param withdrawFromWalletDoneTriggerScript ウォレットからの減算完了時 に実行されるGS2-Script
 	 * @return this
 	 */
-	public UpdateGoldRequest withSubtractFromWalletDoneTriggerScript(String subtractFromWalletDoneTriggerScript) {
-		setSubtractFromWalletDoneTriggerScript(subtractFromWalletDoneTriggerScript);
+	public UpdateGoldRequest withWithdrawFromWalletDoneTriggerScript(String withdrawFromWalletDoneTriggerScript) {
+		setWithdrawFromWalletDoneTriggerScript(withdrawFromWalletDoneTriggerScript);
 		return this;
 	}
 

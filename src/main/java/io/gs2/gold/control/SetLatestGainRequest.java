@@ -25,10 +25,10 @@ import io.gs2.control.Gs2BasicRequest;
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class SubtractFromWalletRequest extends Gs2BasicRequest<SubtractFromWalletRequest> {
+public class SetLatestGainRequest extends Gs2BasicRequest<SetLatestGainRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "SubtractFromWallet";
+		public static final String FUNCTION = "SetLatestGain";
 	}
 
 	/** ゴールドの名前を指定します。 */
@@ -37,11 +37,8 @@ public class SubtractFromWalletRequest extends Gs2BasicRequest<SubtractFromWalle
 	/** ウォレット所有者のユーザIDを指定します。 */
 	private String userId;
 
-	/** 減算量 */
-	private Integer value;
-
-	/** コンテキスト */
-	private String context;
+	/** 期間内の取得量 */
+	private Long value;
 
 
 	/**
@@ -68,7 +65,7 @@ public class SubtractFromWalletRequest extends Gs2BasicRequest<SubtractFromWalle
 	 * @param goldName ゴールドの名前を指定します。
 	 * @return this
 	 */
-	public SubtractFromWalletRequest withGoldName(String goldName) {
+	public SetLatestGainRequest withGoldName(String goldName) {
 		setGoldName(goldName);
 		return this;
 	}
@@ -97,66 +94,37 @@ public class SubtractFromWalletRequest extends Gs2BasicRequest<SubtractFromWalle
 	 * @param userId ウォレット所有者のユーザIDを指定します。
 	 * @return this
 	 */
-	public SubtractFromWalletRequest withUserId(String userId) {
+	public SetLatestGainRequest withUserId(String userId) {
 		setUserId(userId);
 		return this;
 	}
 
 	/**
-	 * 減算量を取得
+	 * 期間内の取得量を取得
 	 *
-	 * @return 減算量
+	 * @return 期間内の取得量
 	 */
-	public Integer getValue() {
+	public Long getValue() {
 		return value;
 	}
 
 	/**
-	 * 減算量を設定
+	 * 期間内の取得量を設定
 	 *
-	 * @param value 減算量
+	 * @param value 期間内の取得量
 	 */
-	public void setValue(Integer value) {
+	public void setValue(Long value) {
 		this.value = value;
 	}
 
 	/**
-	 * 減算量を設定
+	 * 期間内の取得量を設定
 	 *
-	 * @param value 減算量
+	 * @param value 期間内の取得量
 	 * @return this
 	 */
-	public SubtractFromWalletRequest withValue(Integer value) {
+	public SetLatestGainRequest withValue(Long value) {
 		setValue(value);
-		return this;
-	}
-
-	/**
-	 * コンテキストを取得
-	 *
-	 * @return コンテキスト
-	 */
-	public String getContext() {
-		return context;
-	}
-
-	/**
-	 * コンテキストを設定
-	 *
-	 * @param context コンテキスト
-	 */
-	public void setContext(String context) {
-		this.context = context;
-	}
-
-	/**
-	 * コンテキストを設定
-	 *
-	 * @param context コンテキスト
-	 * @return this
-	 */
-	public SubtractFromWalletRequest withContext(String context) {
-		setContext(context);
 		return this;
 	}
 

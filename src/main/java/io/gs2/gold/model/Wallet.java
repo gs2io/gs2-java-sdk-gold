@@ -34,10 +34,10 @@ public class Wallet implements Serializable {
 	private String userId;
 
 	/** 残高 */
-	private Integer balance;
+	private Long balance;
 
 	/** 直近の期間の取得量 */
-	private Integer latestGain;
+	private Long latestGain;
 
 	/** 作成日時(エポック秒) */
 	private Integer createAt;
@@ -69,7 +69,7 @@ public class Wallet implements Serializable {
 	 *
 	 * @return 残高
 	 */
-	public Integer getBalance() {
+	public Long getBalance() {
 		return balance;
 	}
 
@@ -78,7 +78,7 @@ public class Wallet implements Serializable {
 	 *
 	 * @param balance 残高
 	 */
-	public void setBalance(Integer balance) {
+	public void setBalance(Long balance) {
 		this.balance = balance;
 	}
 
@@ -87,7 +87,7 @@ public class Wallet implements Serializable {
 	 *
 	 * @return 直近の期間の取得量
 	 */
-	public Integer getLatestGain() {
+	public Long getLatestGain() {
 		return latestGain;
 	}
 
@@ -96,7 +96,7 @@ public class Wallet implements Serializable {
 	 *
 	 * @param latestGain 直近の期間の取得量
 	 */
-	public void setLatestGain(Integer latestGain) {
+	public void setLatestGain(Long latestGain) {
 		this.latestGain = latestGain;
 	}
 

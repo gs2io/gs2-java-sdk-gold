@@ -25,10 +25,10 @@ import io.gs2.control.Gs2BasicRequest;
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class AddToWalletRequest extends Gs2BasicRequest<AddToWalletRequest> {
+public class WithdrawFromWalletRequest extends Gs2BasicRequest<WithdrawFromWalletRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "AddToWallet";
+		public static final String FUNCTION = "WithdrawFromWallet";
 	}
 
 	/** ゴールドの名前を指定します。 */
@@ -37,8 +37,8 @@ public class AddToWalletRequest extends Gs2BasicRequest<AddToWalletRequest> {
 	/** ウォレット所有者のユーザIDを指定します。 */
 	private String userId;
 
-	/** 加算量 */
-	private Integer value;
+	/** 減算量 */
+	private Long value;
 
 	/** コンテキスト */
 	private String context;
@@ -68,7 +68,7 @@ public class AddToWalletRequest extends Gs2BasicRequest<AddToWalletRequest> {
 	 * @param goldName ゴールドの名前を指定します。
 	 * @return this
 	 */
-	public AddToWalletRequest withGoldName(String goldName) {
+	public WithdrawFromWalletRequest withGoldName(String goldName) {
 		setGoldName(goldName);
 		return this;
 	}
@@ -97,36 +97,36 @@ public class AddToWalletRequest extends Gs2BasicRequest<AddToWalletRequest> {
 	 * @param userId ウォレット所有者のユーザIDを指定します。
 	 * @return this
 	 */
-	public AddToWalletRequest withUserId(String userId) {
+	public WithdrawFromWalletRequest withUserId(String userId) {
 		setUserId(userId);
 		return this;
 	}
 
 	/**
-	 * 加算量を取得
+	 * 減算量を取得
 	 *
-	 * @return 加算量
+	 * @return 減算量
 	 */
-	public Integer getValue() {
+	public Long getValue() {
 		return value;
 	}
 
 	/**
-	 * 加算量を設定
+	 * 減算量を設定
 	 *
-	 * @param value 加算量
+	 * @param value 減算量
 	 */
-	public void setValue(Integer value) {
+	public void setValue(Long value) {
 		this.value = value;
 	}
 
 	/**
-	 * 加算量を設定
+	 * 減算量を設定
 	 *
-	 * @param value 加算量
+	 * @param value 減算量
 	 * @return this
 	 */
-	public AddToWalletRequest withValue(Integer value) {
+	public WithdrawFromWalletRequest withValue(Long value) {
 		setValue(value);
 		return this;
 	}
@@ -155,7 +155,7 @@ public class AddToWalletRequest extends Gs2BasicRequest<AddToWalletRequest> {
 	 * @param context コンテキスト
 	 * @return this
 	 */
-	public AddToWalletRequest withContext(String context) {
+	public WithdrawFromWalletRequest withContext(String context) {
 		setContext(context);
 		return this;
 	}

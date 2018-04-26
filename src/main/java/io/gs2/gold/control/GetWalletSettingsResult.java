@@ -25,27 +25,27 @@ import io.gs2.gold.model.*;
  * @author Game Server Services, Inc.
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class AddToMyWalletResult {
+public class GetWalletSettingsResult {
 
-	/** ウォレット */
-	private Wallet item;
+	/** ウォレット設定 */
+	private WalletSettings item;
 
 
 	/**
-	 * ウォレットを取得
+	 * ウォレット設定を取得
 	 *
-	 * @return ウォレット
+	 * @return ウォレット設定
 	 */
-	public Wallet getItem() {
+	public WalletSettings getItem() {
 		return item;
 	}
 
 	/**
-	 * ウォレットを設定
+	 * ウォレット設定を設定
 	 *
-	 * @param item ウォレット
+	 * @param item ウォレット設定
 	 */
-	public void setItem(Wallet item) {
+	public void setItem(WalletSettings item) {
 		this.item = item;
 	}
 

@@ -25,17 +25,17 @@ import io.gs2.control.Gs2UserRequest;
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class SubtractFromMyWalletRequest extends Gs2UserRequest<SubtractFromMyWalletRequest> {
+public class WithdrawFromMyWalletRequest extends Gs2UserRequest<WithdrawFromMyWalletRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "SubtractFromMyWallet";
+		public static final String FUNCTION = "WithdrawFromMyWallet";
 	}
 
 	/** ゴールドの名前を指定します。 */
 	private String goldName;
 
 	/** 減算量 */
-	private Integer value;
+	private Long value;
 
 	/** コンテキスト */
 	private String context;
@@ -65,7 +65,7 @@ public class SubtractFromMyWalletRequest extends Gs2UserRequest<SubtractFromMyWa
 	 * @param goldName ゴールドの名前を指定します。
 	 * @return this
 	 */
-	public SubtractFromMyWalletRequest withGoldName(String goldName) {
+	public WithdrawFromMyWalletRequest withGoldName(String goldName) {
 		setGoldName(goldName);
 		return this;
 	}
@@ -75,7 +75,7 @@ public class SubtractFromMyWalletRequest extends Gs2UserRequest<SubtractFromMyWa
 	 *
 	 * @return 減算量
 	 */
-	public Integer getValue() {
+	public Long getValue() {
 		return value;
 	}
 
@@ -84,7 +84,7 @@ public class SubtractFromMyWalletRequest extends Gs2UserRequest<SubtractFromMyWa
 	 *
 	 * @param value 減算量
 	 */
-	public void setValue(Integer value) {
+	public void setValue(Long value) {
 		this.value = value;
 	}
 
@@ -94,7 +94,7 @@ public class SubtractFromMyWalletRequest extends Gs2UserRequest<SubtractFromMyWa
 	 * @param value 減算量
 	 * @return this
 	 */
-	public SubtractFromMyWalletRequest withValue(Integer value) {
+	public WithdrawFromMyWalletRequest withValue(Long value) {
 		setValue(value);
 		return this;
 	}
@@ -123,7 +123,7 @@ public class SubtractFromMyWalletRequest extends Gs2UserRequest<SubtractFromMyWa
 	 * @param context コンテキスト
 	 * @return this
 	 */
-	public SubtractFromMyWalletRequest withContext(String context) {
+	public WithdrawFromMyWalletRequest withContext(String context) {
 		setContext(context);
 		return this;
 	}

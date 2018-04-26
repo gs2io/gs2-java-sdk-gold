@@ -19,16 +19,16 @@ package io.gs2.gold.control;
 import org.json.JSONObject;
 import java.util.List;
 import io.gs2.gold.Gs2Gold;
-import io.gs2.control.Gs2UserRequest;
+import io.gs2.control.Gs2BasicRequest;
 
 /**
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class GetMyWalletRequest extends Gs2UserRequest<GetMyWalletRequest> {
+public class GetWalletSettingsRequest extends Gs2BasicRequest<GetWalletSettingsRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "GetMyWallet";
+		public static final String FUNCTION = "GetWalletSettings";
 	}
 
 	/** ゴールドの名前を指定します。 */
@@ -59,7 +59,7 @@ public class GetMyWalletRequest extends Gs2UserRequest<GetMyWalletRequest> {
 	 * @param goldName ゴールドの名前を指定します。
 	 * @return this
 	 */
-	public GetMyWalletRequest withGoldName(String goldName) {
+	public GetWalletSettingsRequest withGoldName(String goldName) {
 		setGoldName(goldName);
 		return this;
 	}

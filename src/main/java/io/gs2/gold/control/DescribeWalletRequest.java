@@ -25,20 +25,20 @@ import io.gs2.control.Gs2BasicRequest;
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class ResetLatestGainRequest extends Gs2BasicRequest<ResetLatestGainRequest> {
+public class DescribeWalletRequest extends Gs2BasicRequest<DescribeWalletRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "ResetLatestGain";
+		public static final String FUNCTION = "DescribeWallet";
 	}
 
 	/** ゴールドの名前を指定します。 */
 	private String goldName;
 
-	/** ウォレット所有者のユーザIDを指定します。 */
-	private String userId;
+	/** データの取得を開始する位置を指定するトークン */
+	private String pageToken;
 
-	/** 期間内の取得量 */
-	private Integer value;
+	/** データの取得件数 */
+	private Integer limit;
 
 
 	/**
@@ -65,66 +65,66 @@ public class ResetLatestGainRequest extends Gs2BasicRequest<ResetLatestGainReque
 	 * @param goldName ゴールドの名前を指定します。
 	 * @return this
 	 */
-	public ResetLatestGainRequest withGoldName(String goldName) {
+	public DescribeWalletRequest withGoldName(String goldName) {
 		setGoldName(goldName);
 		return this;
 	}
 
 	/**
-	 * ウォレット所有者のユーザIDを指定します。を取得
+	 * データの取得を開始する位置を指定するトークンを取得
 	 *
-	 * @return ウォレット所有者のユーザIDを指定します。
+	 * @return データの取得を開始する位置を指定するトークン
 	 */
-	public String getUserId() {
-		return userId;
+	public String getPageToken() {
+		return pageToken;
 	}
 
 	/**
-	 * ウォレット所有者のユーザIDを指定します。を設定
+	 * データの取得を開始する位置を指定するトークンを設定
 	 *
-	 * @param userId ウォレット所有者のユーザIDを指定します。
+	 * @param pageToken データの取得を開始する位置を指定するトークン
 	 */
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setPageToken(String pageToken) {
+		this.pageToken = pageToken;
 	}
 
 	/**
-	 * ウォレット所有者のユーザIDを指定します。を設定
+	 * データの取得を開始する位置を指定するトークンを設定
 	 *
-	 * @param userId ウォレット所有者のユーザIDを指定します。
+	 * @param pageToken データの取得を開始する位置を指定するトークン
 	 * @return this
 	 */
-	public ResetLatestGainRequest withUserId(String userId) {
-		setUserId(userId);
+	public DescribeWalletRequest withPageToken(String pageToken) {
+		setPageToken(pageToken);
 		return this;
 	}
 
 	/**
-	 * 期間内の取得量を取得
+	 * データの取得件数を取得
 	 *
-	 * @return 期間内の取得量
+	 * @return データの取得件数
 	 */
-	public Integer getValue() {
-		return value;
+	public Integer getLimit() {
+		return limit;
 	}
 
 	/**
-	 * 期間内の取得量を設定
+	 * データの取得件数を設定
 	 *
-	 * @param value 期間内の取得量
+	 * @param limit データの取得件数
 	 */
-	public void setValue(Integer value) {
-		this.value = value;
+	public void setLimit(Integer limit) {
+		this.limit = limit;
 	}
 
 	/**
-	 * 期間内の取得量を設定
+	 * データの取得件数を設定
 	 *
-	 * @param value 期間内の取得量
+	 * @param limit データの取得件数
 	 * @return this
 	 */
-	public ResetLatestGainRequest withValue(Integer value) {
-		setValue(value);
+	public DescribeWalletRequest withLimit(Integer limit) {
+		setLimit(limit);
 		return this;
 	}
 

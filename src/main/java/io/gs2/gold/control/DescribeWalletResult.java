@@ -25,10 +25,13 @@ import io.gs2.gold.model.*;
  * @author Game Server Services, Inc.
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class SubtractFromMyWalletResult {
+public class DescribeWalletResult {
 
 	/** ウォレット */
-	private Wallet item;
+	private List<Wallet> items;
+
+	/** 次のページを読み込むためのトークン */
+	private String nextPageToken;
 
 
 	/**
@@ -36,17 +39,35 @@ public class SubtractFromMyWalletResult {
 	 *
 	 * @return ウォレット
 	 */
-	public Wallet getItem() {
-		return item;
+	public List<Wallet> getItems() {
+		return items;
 	}
 
 	/**
 	 * ウォレットを設定
 	 *
-	 * @param item ウォレット
+	 * @param items ウォレット
 	 */
-	public void setItem(Wallet item) {
-		this.item = item;
+	public void setItems(List<Wallet> items) {
+		this.items = items;
+	}
+
+	/**
+	 * 次のページを読み込むためのトークンを取得
+	 *
+	 * @return 次のページを読み込むためのトークン
+	 */
+	public String getNextPageToken() {
+		return nextPageToken;
+	}
+
+	/**
+	 * 次のページを読み込むためのトークンを設定
+	 *
+	 * @param nextPageToken 次のページを読み込むためのトークン
+	 */
+	public void setNextPageToken(String nextPageToken) {
+		this.nextPageToken = nextPageToken;
 	}
 
 }

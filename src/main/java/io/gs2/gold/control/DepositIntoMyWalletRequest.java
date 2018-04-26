@@ -25,17 +25,17 @@ import io.gs2.control.Gs2UserRequest;
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class AddToMyWalletRequest extends Gs2UserRequest<AddToMyWalletRequest> {
+public class DepositIntoMyWalletRequest extends Gs2UserRequest<DepositIntoMyWalletRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "AddToMyWallet";
+		public static final String FUNCTION = "DepositIntoMyWallet";
 	}
 
 	/** ゴールドの名前を指定します。 */
 	private String goldName;
 
 	/** 加算量 */
-	private Integer value;
+	private Long value;
 
 	/** コンテキスト */
 	private String context;
@@ -65,7 +65,7 @@ public class AddToMyWalletRequest extends Gs2UserRequest<AddToMyWalletRequest> {
 	 * @param goldName ゴールドの名前を指定します。
 	 * @return this
 	 */
-	public AddToMyWalletRequest withGoldName(String goldName) {
+	public DepositIntoMyWalletRequest withGoldName(String goldName) {
 		setGoldName(goldName);
 		return this;
 	}
@@ -75,7 +75,7 @@ public class AddToMyWalletRequest extends Gs2UserRequest<AddToMyWalletRequest> {
 	 *
 	 * @return 加算量
 	 */
-	public Integer getValue() {
+	public Long getValue() {
 		return value;
 	}
 
@@ -84,7 +84,7 @@ public class AddToMyWalletRequest extends Gs2UserRequest<AddToMyWalletRequest> {
 	 *
 	 * @param value 加算量
 	 */
-	public void setValue(Integer value) {
+	public void setValue(Long value) {
 		this.value = value;
 	}
 
@@ -94,7 +94,7 @@ public class AddToMyWalletRequest extends Gs2UserRequest<AddToMyWalletRequest> {
 	 * @param value 加算量
 	 * @return this
 	 */
-	public AddToMyWalletRequest withValue(Integer value) {
+	public DepositIntoMyWalletRequest withValue(Long value) {
 		setValue(value);
 		return this;
 	}
@@ -123,7 +123,7 @@ public class AddToMyWalletRequest extends Gs2UserRequest<AddToMyWalletRequest> {
 	 * @param context コンテキスト
 	 * @return this
 	 */
-	public AddToMyWalletRequest withContext(String context) {
+	public DepositIntoMyWalletRequest withContext(String context) {
 		setContext(context);
 		return this;
 	}
