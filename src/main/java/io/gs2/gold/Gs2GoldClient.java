@@ -204,6 +204,46 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 
 	/**
+	 * ウォレットの一覧を取得します<br>
+	 * <br>
+	 * - 消費クオータ: 30件あたり10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public DescribeWalletResult describeWallet(DescribeWalletRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet";
+
+        List<NameValuePair> queryString = new ArrayList<>();
+        if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
+        if(request.getLimit() != null) queryString.add(new BasicNameValuePair("limit", String.valueOf(request.getLimit())));
+
+
+		if(queryString.size() > 0) {
+			url += "?" + URLEncodedUtils.format(queryString, "UTF-8");
+		}
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				DescribeWalletRequest.Constant.MODULE,
+				DescribeWalletRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(get, DescribeWalletResult.class);
+
+	}
+
+
+	/**
 	 * ゴールドを取得します<br>
 	 * <br>
 	 *
@@ -316,7 +356,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 	/**
 	 * ウォレットの設定を取得します<br>
 	 * <br>
-	 * - 消費クオータ: 3<br>
+	 * - 消費クオータ: 2<br>
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
@@ -350,7 +390,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 	/**
 	 * ウォレットの残高を加算します<br>
 	 * <br>
-	 * - 消費クオータ: 10<br>
+	 * - 消費クオータ: 3<br>
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
@@ -386,7 +426,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 	/**
 	 * ウォレットの残高を加算します<br>
 	 * <br>
-	 * - 消費クオータ: 10<br>
+	 * - 消費クオータ: 3<br>
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
@@ -490,7 +530,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 	/**
 	 * ウォレットの残高を加算します<br>
 	 * <br>
-	 * - 消費クオータ: 10<br>
+	 * - 消費クオータ: 3<br>
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
@@ -524,7 +564,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 	/**
 	 * ウォレットの残高を加算します<br>
 	 * <br>
-	 * - 消費クオータ: 10<br>
+	 * - 消費クオータ: 3<br>
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
@@ -560,7 +600,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 	/**
 	 * ウォレットの残高を加算します<br>
 	 * <br>
-	 * - 消費クオータ: 10<br>
+	 * - 消費クオータ: 3<br>
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
