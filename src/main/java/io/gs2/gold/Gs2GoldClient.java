@@ -18,7 +18,9 @@ package io.gs2.gold;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import io.gs2.model.Region;
 import io.gs2.util.EncodingUtil;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpDelete;
@@ -55,6 +57,27 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 		super(credential);
 	}
 
+	/**
+	 * コンストラクタ。
+	 *
+	 * @param credential 認証情報
+	 * @param region リージョン
+	 */
+	public Gs2GoldClient(IGs2Credential credential, Region region) {
+		super(credential, region);
+	}
+
+	/**
+	 * コンストラクタ。
+	 *
+	 * @param credential 認証情報
+	 * @param region リージョン
+	 */
+	public Gs2GoldClient(IGs2Credential credential, String region) {
+		super(credential, region);
+		
+	}
+
 
 	/**
 	 * ゴールドを新規作成します<br>
@@ -71,7 +94,6 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
 				.put("name", request.getName())
 				.put("serviceClass", request.getServiceClass());
-
         if(request.getDescription() != null) body.put("description", request.getDescription());
         if(request.getBalanceMax() != null) body.put("balanceMax", request.getBalanceMax());
         if(request.getResetType() != null) body.put("resetType", request.getResetType());
@@ -86,6 +108,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
         if(request.getDepositIntoWalletDoneTriggerScript() != null) body.put("depositIntoWalletDoneTriggerScript", request.getDepositIntoWalletDoneTriggerScript());
         if(request.getWithdrawFromWalletTriggerScript() != null) body.put("withdrawFromWalletTriggerScript", request.getWithdrawFromWalletTriggerScript());
         if(request.getWithdrawFromWalletDoneTriggerScript() != null) body.put("withdrawFromWalletDoneTriggerScript", request.getWithdrawFromWalletDoneTriggerScript());
+
 		HttpPost post = createHttpPost(
 				Gs2Constant.ENDPOINT_HOST + "/gold",
 				credential,
@@ -321,7 +344,6 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
 				.put("serviceClass", request.getServiceClass());
-
         if(request.getDescription() != null) body.put("description", request.getDescription());
         if(request.getBalanceMax() != null) body.put("balanceMax", request.getBalanceMax());
         if(request.getResetType() != null) body.put("resetType", request.getResetType());
@@ -403,8 +425,8 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
 				.put("value", request.getValue());
-
         if(request.getContext() != null) body.put("context", request.getContext());
+
 		HttpPost post = createHttpPost(
 				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/self/action/deposit",
 				credential,
@@ -439,8 +461,8 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
 				.put("value", request.getValue());
-
         if(request.getContext() != null) body.put("context", request.getContext());
+
 		HttpPost post = createHttpPost(
 				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "/action/deposit",
 				credential,
@@ -454,6 +476,42 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 
 		return doRequest(post, DepositIntoWalletResult.class);
+
+	}
+
+
+	/**
+	 * スタンプタスクを使用してウォレットの残高を加算します<br>
+	 * <br>
+	 * - 消費クオータ: 3<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public DepositIntoWalletByStampSheetResult depositIntoWalletByStampSheet(DepositIntoWalletByStampSheetRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("sheet", request.getSheet())
+				.put("keyName", request.getKeyName());
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/wallet/action/deposit",
+				credential,
+				ENDPOINT,
+				DepositIntoWalletByStampSheetRequest.Constant.MODULE,
+				DepositIntoWalletByStampSheetRequest.Constant.FUNCTION,
+				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		return doRequest(post, DepositIntoWalletByStampSheetResult.class);
 
 	}
 
@@ -562,7 +620,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 
 	/**
-	 * ウォレットの残高を加算します<br>
+	 * ウォレットの残高を減算します<br>
 	 * <br>
 	 * - 消費クオータ: 3<br>
 	 * <br>
@@ -577,8 +635,8 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
 				.put("value", request.getValue());
-
         if(request.getContext() != null) body.put("context", request.getContext());
+
 		HttpPost post = createHttpPost(
 				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/self/action/withdraw",
 				credential,
@@ -598,7 +656,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 
 	/**
-	 * ウォレットの残高を加算します<br>
+	 * ウォレットの残高を減算します<br>
 	 * <br>
 	 * - 消費クオータ: 3<br>
 	 * <br>
@@ -613,8 +671,8 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
 				.put("value", request.getValue());
-
         if(request.getContext() != null) body.put("context", request.getContext());
+
 		HttpPost post = createHttpPost(
 				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "/action/withdraw",
 				credential,
@@ -628,6 +686,43 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 
 		return doRequest(post, WithdrawFromWalletResult.class);
+
+	}
+
+
+	/**
+	 * スタンプタスクを使用してウォレットの減算を加算します<br>
+	 * <br>
+	 * - 消費クオータ: 3<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public WithdrawFromWalletByStampTaskResult withdrawFromWalletByStampTask(WithdrawFromWalletByStampTaskRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("task", request.getTask())
+				.put("keyName", request.getKeyName())
+				.put("transactionId", request.getTransactionId());
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/wallet/action/withdraw",
+				credential,
+				ENDPOINT,
+				WithdrawFromWalletByStampTaskRequest.Constant.MODULE,
+				WithdrawFromWalletByStampTaskRequest.Constant.FUNCTION,
+				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		return doRequest(post, WithdrawFromWalletByStampTaskResult.class);
 
 	}
 
