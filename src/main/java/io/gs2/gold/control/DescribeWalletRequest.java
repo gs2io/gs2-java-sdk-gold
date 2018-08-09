@@ -35,9 +35,6 @@ public class DescribeWalletRequest extends Gs2UserRequest<DescribeWalletRequest>
 	/** ゴールドプールの名前 */
 	private String goldPoolName;
 
-	/** ゴールドの名前 */
-	private String goldName;
-
 	/** データの取得を開始する位置を指定するトークン */
 	private String pageToken;
 
@@ -71,35 +68,6 @@ public class DescribeWalletRequest extends Gs2UserRequest<DescribeWalletRequest>
 	 */
 	public DescribeWalletRequest withGoldPoolName(String goldPoolName) {
 		setGoldPoolName(goldPoolName);
-		return this;
-	}
-
-	/**
-	 * ゴールドの名前を取得
-	 *
-	 * @return ゴールドの名前
-	 */
-	public String getGoldName() {
-		return goldName;
-	}
-
-	/**
-	 * ゴールドの名前を設定
-	 *
-	 * @param goldName ゴールドの名前
-	 */
-	public void setGoldName(String goldName) {
-		this.goldName = goldName;
-	}
-
-	/**
-	 * ゴールドの名前を設定
-	 *
-	 * @param goldName ゴールドの名前
-	 * @return this
-	 */
-	public DescribeWalletRequest withGoldName(String goldName) {
-		setGoldName(goldName);
 		return this;
 	}
 

@@ -29,7 +29,7 @@ import io.gs2.control.Gs2BasicRequest;
 public class CreateGoldPoolRequest extends Gs2BasicRequest<CreateGoldPoolRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "CreateGold";
+		public static final String FUNCTION = "CreateGoldPool";
 	}
 
 	/** ゴールドプール名 */

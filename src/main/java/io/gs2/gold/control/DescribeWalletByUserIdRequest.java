@@ -35,9 +35,6 @@ public class DescribeWalletByUserIdRequest extends Gs2BasicRequest<DescribeWalle
 	/** ゴールドプールの名前 */
 	private String goldPoolName;
 
-	/** ゴールドの名前 */
-	private String goldName;
-
 	/** ウォレット所有者のユーザID */
 	private String userId;
 
@@ -74,35 +71,6 @@ public class DescribeWalletByUserIdRequest extends Gs2BasicRequest<DescribeWalle
 	 */
 	public DescribeWalletByUserIdRequest withGoldPoolName(String goldPoolName) {
 		setGoldPoolName(goldPoolName);
-		return this;
-	}
-
-	/**
-	 * ゴールドの名前を取得
-	 *
-	 * @return ゴールドの名前
-	 */
-	public String getGoldName() {
-		return goldName;
-	}
-
-	/**
-	 * ゴールドの名前を設定
-	 *
-	 * @param goldName ゴールドの名前
-	 */
-	public void setGoldName(String goldName) {
-		this.goldName = goldName;
-	}
-
-	/**
-	 * ゴールドの名前を設定
-	 *
-	 * @param goldName ゴールドの名前
-	 * @return this
-	 */
-	public DescribeWalletByUserIdRequest withGoldName(String goldName) {
-		setGoldName(goldName);
 		return this;
 	}
 
