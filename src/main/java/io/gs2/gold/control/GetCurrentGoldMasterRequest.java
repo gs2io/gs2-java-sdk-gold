@@ -20,23 +20,20 @@ import org.json.JSONObject;
 import java.util.List;
 import io.gs2.gold.model.*;
 import io.gs2.gold.Gs2Gold;
-import io.gs2.control.Gs2UserRequest;
+import io.gs2.control.Gs2BasicRequest;
 
 /**
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class GetWalletRequest extends Gs2UserRequest<GetWalletRequest> {
+public class GetCurrentGoldMasterRequest extends Gs2BasicRequest<GetCurrentGoldMasterRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "GetWallet";
+		public static final String FUNCTION = "GetCurrentGoldMaster";
 	}
 
 	/** ゴールドプールの名前 */
 	private String goldPoolName;
-
-	/** ゴールドの名前 */
-	private String goldName;
 
 
 	/**
@@ -63,37 +60,8 @@ public class GetWalletRequest extends Gs2UserRequest<GetWalletRequest> {
 	 * @param goldPoolName ゴールドプールの名前
 	 * @return this
 	 */
-	public GetWalletRequest withGoldPoolName(String goldPoolName) {
+	public GetCurrentGoldMasterRequest withGoldPoolName(String goldPoolName) {
 		setGoldPoolName(goldPoolName);
-		return this;
-	}
-
-	/**
-	 * ゴールドの名前を取得
-	 *
-	 * @return ゴールドの名前
-	 */
-	public String getGoldName() {
-		return goldName;
-	}
-
-	/**
-	 * ゴールドの名前を設定
-	 *
-	 * @param goldName ゴールドの名前
-	 */
-	public void setGoldName(String goldName) {
-		this.goldName = goldName;
-	}
-
-	/**
-	 * ゴールドの名前を設定
-	 *
-	 * @param goldName ゴールドの名前
-	 * @return this
-	 */
-	public GetWalletRequest withGoldName(String goldName) {
-		setGoldName(goldName);
 		return this;
 	}
 

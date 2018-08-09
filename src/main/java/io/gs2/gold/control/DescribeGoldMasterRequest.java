@@ -20,29 +20,26 @@ import org.json.JSONObject;
 import java.util.List;
 import io.gs2.gold.model.*;
 import io.gs2.gold.Gs2Gold;
-import io.gs2.control.Gs2UserRequest;
+import io.gs2.control.Gs2BasicRequest;
 
 /**
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class DepositIntoWalletRequest extends Gs2UserRequest<DepositIntoWalletRequest> {
+public class DescribeGoldMasterRequest extends Gs2BasicRequest<DescribeGoldMasterRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "DepositIntoWallet";
+		public static final String FUNCTION = "DescribeGoldMaster";
 	}
 
 	/** ゴールドプールの名前 */
 	private String goldPoolName;
 
-	/** ゴールドの名前 */
-	private String goldName;
+	/** データの取得を開始する位置を指定するトークン */
+	private String pageToken;
 
-	/** 加算量 */
-	private Long value;
-
-	/** コンテキスト */
-	private String context;
+	/** データの取得件数 */
+	private Integer limit;
 
 
 	/**
@@ -69,95 +66,66 @@ public class DepositIntoWalletRequest extends Gs2UserRequest<DepositIntoWalletRe
 	 * @param goldPoolName ゴールドプールの名前
 	 * @return this
 	 */
-	public DepositIntoWalletRequest withGoldPoolName(String goldPoolName) {
+	public DescribeGoldMasterRequest withGoldPoolName(String goldPoolName) {
 		setGoldPoolName(goldPoolName);
 		return this;
 	}
 
 	/**
-	 * ゴールドの名前を取得
+	 * データの取得を開始する位置を指定するトークンを取得
 	 *
-	 * @return ゴールドの名前
+	 * @return データの取得を開始する位置を指定するトークン
 	 */
-	public String getGoldName() {
-		return goldName;
+	public String getPageToken() {
+		return pageToken;
 	}
 
 	/**
-	 * ゴールドの名前を設定
+	 * データの取得を開始する位置を指定するトークンを設定
 	 *
-	 * @param goldName ゴールドの名前
+	 * @param pageToken データの取得を開始する位置を指定するトークン
 	 */
-	public void setGoldName(String goldName) {
-		this.goldName = goldName;
+	public void setPageToken(String pageToken) {
+		this.pageToken = pageToken;
 	}
 
 	/**
-	 * ゴールドの名前を設定
+	 * データの取得を開始する位置を指定するトークンを設定
 	 *
-	 * @param goldName ゴールドの名前
+	 * @param pageToken データの取得を開始する位置を指定するトークン
 	 * @return this
 	 */
-	public DepositIntoWalletRequest withGoldName(String goldName) {
-		setGoldName(goldName);
+	public DescribeGoldMasterRequest withPageToken(String pageToken) {
+		setPageToken(pageToken);
 		return this;
 	}
 
 	/**
-	 * 加算量を取得
+	 * データの取得件数を取得
 	 *
-	 * @return 加算量
+	 * @return データの取得件数
 	 */
-	public Long getValue() {
-		return value;
+	public Integer getLimit() {
+		return limit;
 	}
 
 	/**
-	 * 加算量を設定
+	 * データの取得件数を設定
 	 *
-	 * @param value 加算量
+	 * @param limit データの取得件数
 	 */
-	public void setValue(Long value) {
-		this.value = value;
+	public void setLimit(Integer limit) {
+		this.limit = limit;
 	}
 
 	/**
-	 * 加算量を設定
+	 * データの取得件数を設定
 	 *
-	 * @param value 加算量
+	 * @param limit データの取得件数
 	 * @return this
 	 */
-	public DepositIntoWalletRequest withValue(Long value) {
-		setValue(value);
-		return this;
-	}
-
-	/**
-	 * コンテキストを取得
-	 *
-	 * @return コンテキスト
-	 */
-	public String getContext() {
-		return context;
-	}
-
-	/**
-	 * コンテキストを設定
-	 *
-	 * @param context コンテキスト
-	 */
-	public void setContext(String context) {
-		this.context = context;
-	}
-
-	/**
-	 * コンテキストを設定
-	 *
-	 * @param context コンテキスト
-	 * @return this
-	 */
-	public DepositIntoWalletRequest withContext(String context) {
-		setContext(context);
+	public DescribeGoldMasterRequest withLimit(Integer limit) {
+		setLimit(limit);
 		return this;
 	}
 

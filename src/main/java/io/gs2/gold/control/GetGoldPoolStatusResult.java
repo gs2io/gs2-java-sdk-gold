@@ -26,28 +26,28 @@ import io.gs2.gold.model.*;
  * @author Game Server Services, Inc.
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class DescribeServiceClassResult {
+public class GetGoldPoolStatusResult {
 
-	/** サービスクラス一覧 */
-	private List<String> items;
+	/** ステータス */
+	private String status;
 
 
 	/**
-	 * サービスクラス一覧を取得
+	 * ステータスを取得
 	 *
-	 * @return サービスクラス一覧
+	 * @return ステータス
 	 */
-	public List<String> getItems() {
-		return items;
+	public String getStatus() {
+		return status;
 	}
 
 	/**
-	 * サービスクラス一覧を設定
+	 * ステータスを設定
 	 *
-	 * @param items サービスクラス一覧
+	 * @param status ステータス
 	 */
-	public void setItems(List<String> items) {
-		this.items = items;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

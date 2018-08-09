@@ -20,16 +20,16 @@ import org.json.JSONObject;
 import java.util.List;
 import io.gs2.gold.model.*;
 import io.gs2.gold.Gs2Gold;
-import io.gs2.control.Gs2UserRequest;
+import io.gs2.control.Gs2BasicRequest;
 
 /**
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class DescribeWalletRequest extends Gs2UserRequest<DescribeWalletRequest> {
+public class DescribeWalletByUserIdRequest extends Gs2BasicRequest<DescribeWalletByUserIdRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "DescribeWallet";
+		public static final String FUNCTION = "DescribeWalletByUserId";
 	}
 
 	/** ゴールドプールの名前 */
@@ -37,6 +37,9 @@ public class DescribeWalletRequest extends Gs2UserRequest<DescribeWalletRequest>
 
 	/** ゴールドの名前 */
 	private String goldName;
+
+	/** ウォレット所有者のユーザID */
+	private String userId;
 
 	/** データの取得を開始する位置を指定するトークン */
 	private String pageToken;
@@ -69,7 +72,7 @@ public class DescribeWalletRequest extends Gs2UserRequest<DescribeWalletRequest>
 	 * @param goldPoolName ゴールドプールの名前
 	 * @return this
 	 */
-	public DescribeWalletRequest withGoldPoolName(String goldPoolName) {
+	public DescribeWalletByUserIdRequest withGoldPoolName(String goldPoolName) {
 		setGoldPoolName(goldPoolName);
 		return this;
 	}
@@ -98,8 +101,37 @@ public class DescribeWalletRequest extends Gs2UserRequest<DescribeWalletRequest>
 	 * @param goldName ゴールドの名前
 	 * @return this
 	 */
-	public DescribeWalletRequest withGoldName(String goldName) {
+	public DescribeWalletByUserIdRequest withGoldName(String goldName) {
 		setGoldName(goldName);
+		return this;
+	}
+
+	/**
+	 * ウォレット所有者のユーザIDを取得
+	 *
+	 * @return ウォレット所有者のユーザID
+	 */
+	public String getUserId() {
+		return userId;
+	}
+
+	/**
+	 * ウォレット所有者のユーザIDを設定
+	 *
+	 * @param userId ウォレット所有者のユーザID
+	 */
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	/**
+	 * ウォレット所有者のユーザIDを設定
+	 *
+	 * @param userId ウォレット所有者のユーザID
+	 * @return this
+	 */
+	public DescribeWalletByUserIdRequest withUserId(String userId) {
+		setUserId(userId);
 		return this;
 	}
 
@@ -127,7 +159,7 @@ public class DescribeWalletRequest extends Gs2UserRequest<DescribeWalletRequest>
 	 * @param pageToken データの取得を開始する位置を指定するトークン
 	 * @return this
 	 */
-	public DescribeWalletRequest withPageToken(String pageToken) {
+	public DescribeWalletByUserIdRequest withPageToken(String pageToken) {
 		setPageToken(pageToken);
 		return this;
 	}
@@ -156,7 +188,7 @@ public class DescribeWalletRequest extends Gs2UserRequest<DescribeWalletRequest>
 	 * @param limit データの取得件数
 	 * @return this
 	 */
-	public DescribeWalletRequest withLimit(Integer limit) {
+	public DescribeWalletByUserIdRequest withLimit(Integer limit) {
 		setLimit(limit);
 		return this;
 	}

@@ -18,6 +18,7 @@ package io.gs2.gold.control;
 
 import org.json.JSONObject;
 import java.util.List;
+import io.gs2.gold.model.*;
 import io.gs2.gold.Gs2Gold;
 import io.gs2.control.Gs2BasicRequest;
 
@@ -31,10 +32,13 @@ public class SetLatestGainRequest extends Gs2BasicRequest<SetLatestGainRequest> 
 		public static final String FUNCTION = "SetLatestGain";
 	}
 
-	/** ゴールドの名前を指定します。 */
+	/** ゴールドプールの名前 */
+	private String goldPoolName;
+
+	/** ゴールドの名前 */
 	private String goldName;
 
-	/** ウォレット所有者のユーザIDを指定します。 */
+	/** ウォレット所有者のユーザID */
 	private String userId;
 
 	/** 期間内の取得量 */
@@ -42,27 +46,56 @@ public class SetLatestGainRequest extends Gs2BasicRequest<SetLatestGainRequest> 
 
 
 	/**
-	 * ゴールドの名前を指定します。を取得
+	 * ゴールドプールの名前を取得
 	 *
-	 * @return ゴールドの名前を指定します。
+	 * @return ゴールドプールの名前
+	 */
+	public String getGoldPoolName() {
+		return goldPoolName;
+	}
+
+	/**
+	 * ゴールドプールの名前を設定
+	 *
+	 * @param goldPoolName ゴールドプールの名前
+	 */
+	public void setGoldPoolName(String goldPoolName) {
+		this.goldPoolName = goldPoolName;
+	}
+
+	/**
+	 * ゴールドプールの名前を設定
+	 *
+	 * @param goldPoolName ゴールドプールの名前
+	 * @return this
+	 */
+	public SetLatestGainRequest withGoldPoolName(String goldPoolName) {
+		setGoldPoolName(goldPoolName);
+		return this;
+	}
+
+	/**
+	 * ゴールドの名前を取得
+	 *
+	 * @return ゴールドの名前
 	 */
 	public String getGoldName() {
 		return goldName;
 	}
 
 	/**
-	 * ゴールドの名前を指定します。を設定
+	 * ゴールドの名前を設定
 	 *
-	 * @param goldName ゴールドの名前を指定します。
+	 * @param goldName ゴールドの名前
 	 */
 	public void setGoldName(String goldName) {
 		this.goldName = goldName;
 	}
 
 	/**
-	 * ゴールドの名前を指定します。を設定
+	 * ゴールドの名前を設定
 	 *
-	 * @param goldName ゴールドの名前を指定します。
+	 * @param goldName ゴールドの名前
 	 * @return this
 	 */
 	public SetLatestGainRequest withGoldName(String goldName) {
@@ -71,27 +104,27 @@ public class SetLatestGainRequest extends Gs2BasicRequest<SetLatestGainRequest> 
 	}
 
 	/**
-	 * ウォレット所有者のユーザIDを指定します。を取得
+	 * ウォレット所有者のユーザIDを取得
 	 *
-	 * @return ウォレット所有者のユーザIDを指定します。
+	 * @return ウォレット所有者のユーザID
 	 */
 	public String getUserId() {
 		return userId;
 	}
 
 	/**
-	 * ウォレット所有者のユーザIDを指定します。を設定
+	 * ウォレット所有者のユーザIDを設定
 	 *
-	 * @param userId ウォレット所有者のユーザIDを指定します。
+	 * @param userId ウォレット所有者のユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
 	/**
-	 * ウォレット所有者のユーザIDを指定します。を設定
+	 * ウォレット所有者のユーザIDを設定
 	 *
-	 * @param userId ウォレット所有者のユーザIDを指定します。
+	 * @param userId ウォレット所有者のユーザID
 	 * @return this
 	 */
 	public SetLatestGainRequest withUserId(String userId) {

@@ -20,16 +20,16 @@ import org.json.JSONObject;
 import java.util.List;
 import io.gs2.gold.model.*;
 import io.gs2.gold.Gs2Gold;
-import io.gs2.control.Gs2UserRequest;
+import io.gs2.control.Gs2BasicRequest;
 
 /**
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class DepositIntoWalletRequest extends Gs2UserRequest<DepositIntoWalletRequest> {
+public class WithdrawFromWalletByUserIdRequest extends Gs2BasicRequest<WithdrawFromWalletByUserIdRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "DepositIntoWallet";
+		public static final String FUNCTION = "WithdrawFromWalletByUserId";
 	}
 
 	/** ゴールドプールの名前 */
@@ -38,7 +38,10 @@ public class DepositIntoWalletRequest extends Gs2UserRequest<DepositIntoWalletRe
 	/** ゴールドの名前 */
 	private String goldName;
 
-	/** 加算量 */
+	/** ウォレット所有者のユーザID */
+	private String userId;
+
+	/** 減算量 */
 	private Long value;
 
 	/** コンテキスト */
@@ -69,7 +72,7 @@ public class DepositIntoWalletRequest extends Gs2UserRequest<DepositIntoWalletRe
 	 * @param goldPoolName ゴールドプールの名前
 	 * @return this
 	 */
-	public DepositIntoWalletRequest withGoldPoolName(String goldPoolName) {
+	public WithdrawFromWalletByUserIdRequest withGoldPoolName(String goldPoolName) {
 		setGoldPoolName(goldPoolName);
 		return this;
 	}
@@ -98,36 +101,65 @@ public class DepositIntoWalletRequest extends Gs2UserRequest<DepositIntoWalletRe
 	 * @param goldName ゴールドの名前
 	 * @return this
 	 */
-	public DepositIntoWalletRequest withGoldName(String goldName) {
+	public WithdrawFromWalletByUserIdRequest withGoldName(String goldName) {
 		setGoldName(goldName);
 		return this;
 	}
 
 	/**
-	 * 加算量を取得
+	 * ウォレット所有者のユーザIDを取得
 	 *
-	 * @return 加算量
+	 * @return ウォレット所有者のユーザID
+	 */
+	public String getUserId() {
+		return userId;
+	}
+
+	/**
+	 * ウォレット所有者のユーザIDを設定
+	 *
+	 * @param userId ウォレット所有者のユーザID
+	 */
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	/**
+	 * ウォレット所有者のユーザIDを設定
+	 *
+	 * @param userId ウォレット所有者のユーザID
+	 * @return this
+	 */
+	public WithdrawFromWalletByUserIdRequest withUserId(String userId) {
+		setUserId(userId);
+		return this;
+	}
+
+	/**
+	 * 減算量を取得
+	 *
+	 * @return 減算量
 	 */
 	public Long getValue() {
 		return value;
 	}
 
 	/**
-	 * 加算量を設定
+	 * 減算量を設定
 	 *
-	 * @param value 加算量
+	 * @param value 減算量
 	 */
 	public void setValue(Long value) {
 		this.value = value;
 	}
 
 	/**
-	 * 加算量を設定
+	 * 減算量を設定
 	 *
-	 * @param value 加算量
+	 * @param value 減算量
 	 * @return this
 	 */
-	public DepositIntoWalletRequest withValue(Long value) {
+	public WithdrawFromWalletByUserIdRequest withValue(Long value) {
 		setValue(value);
 		return this;
 	}
@@ -156,7 +188,7 @@ public class DepositIntoWalletRequest extends Gs2UserRequest<DepositIntoWalletRe
 	 * @param context コンテキスト
 	 * @return this
 	 */
-	public DepositIntoWalletRequest withContext(String context) {
+	public WithdrawFromWalletByUserIdRequest withContext(String context) {
 		setContext(context);
 		return this;
 	}

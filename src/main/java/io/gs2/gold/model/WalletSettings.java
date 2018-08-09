@@ -16,9 +16,13 @@
 
 package io.gs2.gold.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
  * ウォレット設定
@@ -30,8 +34,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class WalletSettings implements Serializable {
 
+	/** ゴールド名 */
+	private String goldName;
+
 	/** 各ウォレットの残高の最大値 */
 	private Long balanceMax;
+
+	/** メタデータ */
+	private String meta;
 
 	/** 取得量の期間制限のタイプ */
 	private String resetType;
@@ -48,12 +58,35 @@ public class WalletSettings implements Serializable {
 	/** 期間内の最大取得量 */
 	private Long latestGainMax;
 
-	/** 作成日時(エポック秒) */
-	private Integer createAt;
 
-	/** 最終更新日時(エポック秒) */
-	private Integer updateAt;
+	/**
+	 * ゴールド名を取得
+	 *
+	 * @return ゴールド名
+	 */
+	public String getGoldName() {
+		return goldName;
+	}
 
+	/**
+	 * ゴールド名を設定
+	 *
+	 * @param goldName ゴールド名
+	 */
+	public void setGoldName(String goldName) {
+		this.goldName = goldName;
+	}
+
+	/**
+	 * ゴールド名を設定
+	 *
+	 * @param goldName ゴールド名
+	 * @return this
+	 */
+	public WalletSettings withGoldName(String goldName) {
+		this.goldName = goldName;
+		return this;
+	}
 
 	/**
 	 * 各ウォレットの残高の最大値を取得
@@ -71,6 +104,46 @@ public class WalletSettings implements Serializable {
 	 */
 	public void setBalanceMax(Long balanceMax) {
 		this.balanceMax = balanceMax;
+	}
+
+	/**
+	 * 各ウォレットの残高の最大値を設定
+	 *
+	 * @param balanceMax 各ウォレットの残高の最大値
+	 * @return this
+	 */
+	public WalletSettings withBalanceMax(Long balanceMax) {
+		this.balanceMax = balanceMax;
+		return this;
+	}
+
+	/**
+	 * メタデータを取得
+	 *
+	 * @return メタデータ
+	 */
+	public String getMeta() {
+		return meta;
+	}
+
+	/**
+	 * メタデータを設定
+	 *
+	 * @param meta メタデータ
+	 */
+	public void setMeta(String meta) {
+		this.meta = meta;
+	}
+
+	/**
+	 * メタデータを設定
+	 *
+	 * @param meta メタデータ
+	 * @return this
+	 */
+	public WalletSettings withMeta(String meta) {
+		this.meta = meta;
+		return this;
 	}
 
 	/**
@@ -92,6 +165,17 @@ public class WalletSettings implements Serializable {
 	}
 
 	/**
+	 * 取得量の期間制限のタイプを設定
+	 *
+	 * @param resetType 取得量の期間制限のタイプ
+	 * @return this
+	 */
+	public WalletSettings withResetType(String resetType) {
+		this.resetType = resetType;
+		return this;
+	}
+
+	/**
 	 * 期間内の取得量をリセットする日にちを取得
 	 *
 	 * @return 期間内の取得量をリセットする日にち
@@ -107,6 +191,17 @@ public class WalletSettings implements Serializable {
 	 */
 	public void setResetDayOfMonth(Integer resetDayOfMonth) {
 		this.resetDayOfMonth = resetDayOfMonth;
+	}
+
+	/**
+	 * 期間内の取得量をリセットする日にちを設定
+	 *
+	 * @param resetDayOfMonth 期間内の取得量をリセットする日にち
+	 * @return this
+	 */
+	public WalletSettings withResetDayOfMonth(Integer resetDayOfMonth) {
+		this.resetDayOfMonth = resetDayOfMonth;
+		return this;
 	}
 
 	/**
@@ -128,6 +223,17 @@ public class WalletSettings implements Serializable {
 	}
 
 	/**
+	 * 期間内の取得量をリセットする曜日を設定
+	 *
+	 * @param resetDayOfWeek 期間内の取得量をリセットする曜日
+	 * @return this
+	 */
+	public WalletSettings withResetDayOfWeek(String resetDayOfWeek) {
+		this.resetDayOfWeek = resetDayOfWeek;
+		return this;
+	}
+
+	/**
 	 * 期間内の取得量をリセットする時を取得
 	 *
 	 * @return 期間内の取得量をリセットする時
@@ -143,6 +249,17 @@ public class WalletSettings implements Serializable {
 	 */
 	public void setResetHour(Integer resetHour) {
 		this.resetHour = resetHour;
+	}
+
+	/**
+	 * 期間内の取得量をリセットする時を設定
+	 *
+	 * @param resetHour 期間内の取得量をリセットする時
+	 * @return this
+	 */
+	public WalletSettings withResetHour(Integer resetHour) {
+		this.resetHour = resetHour;
+		return this;
 	}
 
 	/**
@@ -164,39 +281,30 @@ public class WalletSettings implements Serializable {
 	}
 
 	/**
-	 * 作成日時(エポック秒)を取得
+	 * 期間内の最大取得量を設定
 	 *
-	 * @return 作成日時(エポック秒)
+	 * @param latestGainMax 期間内の最大取得量
+	 * @return this
 	 */
-	public Integer getCreateAt() {
-		return createAt;
+	public WalletSettings withLatestGainMax(Long latestGainMax) {
+		this.latestGainMax = latestGainMax;
+		return this;
 	}
 
-	/**
-	 * 作成日時(エポック秒)を設定
-	 *
-	 * @param createAt 作成日時(エポック秒)
-	 */
-	public void setCreateAt(Integer createAt) {
-		this.createAt = createAt;
-	}
 
-	/**
-	 * 最終更新日時(エポック秒)を取得
-	 *
-	 * @return 最終更新日時(エポック秒)
-	 */
-	public Integer getUpdateAt() {
-		return updateAt;
-	}
+    public ObjectNode toJson() {
 
-	/**
-	 * 最終更新日時(エポック秒)を設定
-	 *
-	 * @param updateAt 最終更新日時(エポック秒)
-	 */
-	public void setUpdateAt(Integer updateAt) {
-		this.updateAt = updateAt;
-	}
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
 
+            .put("goldName", this.getGoldName())
+            .put("balanceMax", this.getBalanceMax())
+            .put("meta", this.getMeta())
+            .put("resetType", this.getResetType())
+            .put("resetDayOfMonth", this.getResetDayOfMonth())
+            .put("resetDayOfWeek", this.getResetDayOfWeek())
+            .put("resetHour", this.getResetHour())
+            .put("latestGainMax", this.getLatestGainMax());
+
+        return body;
+    }
 }

@@ -18,6 +18,7 @@ package io.gs2.gold.control;
 
 import org.json.JSONObject;
 import java.util.List;
+import io.gs2.gold.model.*;
 import io.gs2.gold.Gs2Gold;
 import io.gs2.control.Gs2BasicRequest;
 

@@ -26,28 +26,28 @@ import io.gs2.gold.model.*;
  * @author Game Server Services, Inc.
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class DescribeServiceClassResult {
+public class UpdateCurrentGoldMasterResult {
 
-	/** サービスクラス一覧 */
-	private List<String> items;
+	/** 現在適用されているゴールドマスターデータ */
+	private String item;
 
 
 	/**
-	 * サービスクラス一覧を取得
+	 * 現在適用されているゴールドマスターデータを取得
 	 *
-	 * @return サービスクラス一覧
+	 * @return 現在適用されているゴールドマスターデータ
 	 */
-	public List<String> getItems() {
-		return items;
+	public String getItem() {
+		return item;
 	}
 
 	/**
-	 * サービスクラス一覧を設定
+	 * 現在適用されているゴールドマスターデータを設定
 	 *
-	 * @param items サービスクラス一覧
+	 * @param item 現在適用されているゴールドマスターデータ
 	 */
-	public void setItems(List<String> items) {
-		this.items = items;
+	public void setItem(String item) {
+		this.item = item;
 	}
 
 }

@@ -18,7 +18,6 @@ package io.gs2.gold;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import io.gs2.model.Region;
 import io.gs2.util.EncodingUtil;
@@ -32,6 +31,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import io.gs2.AbstractGs2Client;
 import io.gs2.Gs2Constant;
@@ -75,12 +75,12 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 	 */
 	public Gs2GoldClient(IGs2Credential credential, String region) {
 		super(credential, region);
-		
+
 	}
 
 
 	/**
-	 * ゴールドを新規作成します<br>
+	 * 公開されているゴールドマスタを取得します<br>
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
@@ -89,19 +89,81 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	 */
 
-	public CreateGoldResult createGold(CreateGoldRequest request) {
+	public GetCurrentGoldMasterResult getCurrentGoldMaster(GetCurrentGoldMasterRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/gold/master";
+
+
+
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				GetCurrentGoldMasterRequest.Constant.MODULE,
+				GetCurrentGoldMasterRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(get, GetCurrentGoldMasterResult.class);
+
+	}
+
+
+	/**
+	 * 公開するゴールドマスタを更新します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public UpdateCurrentGoldMasterResult updateCurrentGoldMaster(UpdateCurrentGoldMasterRequest request) {
 
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("name", request.getName())
-				.put("serviceClass", request.getServiceClass());
-        if(request.getDescription() != null) body.put("description", request.getDescription());
+				.put("settings", request.getSettings());
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/gold/master",
+				credential,
+				ENDPOINT,
+				UpdateCurrentGoldMasterRequest.Constant.MODULE,
+				UpdateCurrentGoldMasterRequest.Constant.FUNCTION,
+				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(post, UpdateCurrentGoldMasterResult.class);
+
+	}
+
+
+	/**
+	 * ゴールドマスターを新規作成します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public CreateGoldMasterResult createGoldMaster(CreateGoldMasterRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("name", request.getName());
+        if(request.getMeta() != null) body.put("meta", request.getMeta());
         if(request.getBalanceMax() != null) body.put("balanceMax", request.getBalanceMax());
         if(request.getResetType() != null) body.put("resetType", request.getResetType());
         if(request.getResetDayOfMonth() != null) body.put("resetDayOfMonth", request.getResetDayOfMonth());
         if(request.getResetDayOfWeek() != null) body.put("resetDayOfWeek", request.getResetDayOfWeek());
         if(request.getResetHour() != null) body.put("resetHour", request.getResetHour());
         if(request.getLatestGainMax() != null) body.put("latestGainMax", request.getLatestGainMax());
-        if(request.getNotificationUrl() != null) body.put("notificationUrl", request.getNotificationUrl());
         if(request.getCreateWalletTriggerScript() != null) body.put("createWalletTriggerScript", request.getCreateWalletTriggerScript());
         if(request.getCreateWalletDoneTriggerScript() != null) body.put("createWalletDoneTriggerScript", request.getCreateWalletDoneTriggerScript());
         if(request.getDepositIntoWalletTriggerScript() != null) body.put("depositIntoWalletTriggerScript", request.getDepositIntoWalletTriggerScript());
@@ -110,33 +172,33 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
         if(request.getWithdrawFromWalletDoneTriggerScript() != null) body.put("withdrawFromWalletDoneTriggerScript", request.getWithdrawFromWalletDoneTriggerScript());
 
 		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/gold",
+				Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/master/gold",
 				credential,
 				ENDPOINT,
-				CreateGoldRequest.Constant.MODULE,
-				CreateGoldRequest.Constant.FUNCTION,
+				CreateGoldMasterRequest.Constant.MODULE,
+				CreateGoldMasterRequest.Constant.FUNCTION,
 				body.toString());
         if(request.getRequestId() != null) {
             post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
         }
 
 
-		return doRequest(post, CreateGoldResult.class);
+		return doRequest(post, CreateGoldMasterResult.class);
 
 	}
 
 
 	/**
-	 * ゴールドを削除します<br>
+	 * ゴールドマスターを削除します<br>
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
 
 	 */
 
-	public void deleteGold(DeleteGoldRequest request) {
+	public void deleteGoldMaster(DeleteGoldMasterRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/master/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "";
 
 
 
@@ -144,8 +206,8 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				url,
 				credential,
 				ENDPOINT,
-				DeleteGoldRequest.Constant.MODULE,
-				DeleteGoldRequest.Constant.FUNCTION);
+				DeleteGoldMasterRequest.Constant.MODULE,
+				DeleteGoldMasterRequest.Constant.FUNCTION);
         if(request.getRequestId() != null) {
             delete.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
         }
@@ -157,7 +219,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 
 	/**
-	 * ゴールドの一覧を取得します<br>
+	 * ゴールドマスターの一覧を取得します<br>
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
@@ -166,9 +228,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	 */
 
-	public DescribeGoldResult describeGold(DescribeGoldRequest request) {
+	public DescribeGoldMasterResult describeGoldMaster(DescribeGoldMasterRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/master/gold";
 
         List<NameValuePair> queryString = new ArrayList<>();
         if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
@@ -182,14 +244,197 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				url,
 				credential,
 				ENDPOINT,
-				DescribeGoldRequest.Constant.MODULE,
-				DescribeGoldRequest.Constant.FUNCTION);
+				DescribeGoldMasterRequest.Constant.MODULE,
+				DescribeGoldMasterRequest.Constant.FUNCTION);
         if(request.getRequestId() != null) {
             get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
         }
 
 
-		return doRequest(get, DescribeGoldResult.class);
+		return doRequest(get, DescribeGoldMasterResult.class);
+
+	}
+
+
+	/**
+	 * ゴールドマスターを取得します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public GetGoldMasterResult getGoldMaster(GetGoldMasterRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/master/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "";
+
+
+
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				GetGoldMasterRequest.Constant.MODULE,
+				GetGoldMasterRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(get, GetGoldMasterResult.class);
+
+	}
+
+
+	/**
+	 * ゴールドマスターを更新します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public UpdateGoldMasterResult updateGoldMaster(UpdateGoldMasterRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode();
+        if(request.getMeta() != null) body.put("meta", request.getMeta());
+        if(request.getBalanceMax() != null) body.put("balanceMax", request.getBalanceMax());
+        if(request.getResetType() != null) body.put("resetType", request.getResetType());
+        if(request.getResetDayOfMonth() != null) body.put("resetDayOfMonth", request.getResetDayOfMonth());
+        if(request.getResetDayOfWeek() != null) body.put("resetDayOfWeek", request.getResetDayOfWeek());
+        if(request.getResetHour() != null) body.put("resetHour", request.getResetHour());
+        if(request.getLatestGainMax() != null) body.put("latestGainMax", request.getLatestGainMax());
+        if(request.getCreateWalletTriggerScript() != null) body.put("createWalletTriggerScript", request.getCreateWalletTriggerScript());
+        if(request.getCreateWalletDoneTriggerScript() != null) body.put("createWalletDoneTriggerScript", request.getCreateWalletDoneTriggerScript());
+        if(request.getDepositIntoWalletTriggerScript() != null) body.put("depositIntoWalletTriggerScript", request.getDepositIntoWalletTriggerScript());
+        if(request.getDepositIntoWalletDoneTriggerScript() != null) body.put("depositIntoWalletDoneTriggerScript", request.getDepositIntoWalletDoneTriggerScript());
+        if(request.getWithdrawFromWalletTriggerScript() != null) body.put("withdrawFromWalletTriggerScript", request.getWithdrawFromWalletTriggerScript());
+        if(request.getWithdrawFromWalletDoneTriggerScript() != null) body.put("withdrawFromWalletDoneTriggerScript", request.getWithdrawFromWalletDoneTriggerScript());
+		HttpPut put = createHttpPut(
+				Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/master/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "",
+				credential,
+				ENDPOINT,
+				UpdateGoldMasterRequest.Constant.MODULE,
+				UpdateGoldMasterRequest.Constant.FUNCTION,
+				body.toString());
+        if(request.getRequestId() != null) {
+            put.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(put, UpdateGoldMasterResult.class);
+
+	}
+
+
+	/**
+	 * ゴールドプールを新規作成します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public CreateGoldPoolResult createGoldPool(CreateGoldPoolRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("name", request.getName())
+				.put("serviceClass", request.getServiceClass());
+        if(request.getDescription() != null) body.put("description", request.getDescription());
+        if(request.getCreateWalletTriggerScript() != null) body.put("createWalletTriggerScript", request.getCreateWalletTriggerScript());
+        if(request.getCreateWalletDoneTriggerScript() != null) body.put("createWalletDoneTriggerScript", request.getCreateWalletDoneTriggerScript());
+        if(request.getDepositIntoWalletTriggerScript() != null) body.put("depositIntoWalletTriggerScript", request.getDepositIntoWalletTriggerScript());
+        if(request.getDepositIntoWalletDoneTriggerScript() != null) body.put("depositIntoWalletDoneTriggerScript", request.getDepositIntoWalletDoneTriggerScript());
+        if(request.getWithdrawFromWalletTriggerScript() != null) body.put("withdrawFromWalletTriggerScript", request.getWithdrawFromWalletTriggerScript());
+        if(request.getWithdrawFromWalletDoneTriggerScript() != null) body.put("withdrawFromWalletDoneTriggerScript", request.getWithdrawFromWalletDoneTriggerScript());
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/goldPool",
+				credential,
+				ENDPOINT,
+				CreateGoldPoolRequest.Constant.MODULE,
+				CreateGoldPoolRequest.Constant.FUNCTION,
+				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(post, CreateGoldPoolResult.class);
+
+	}
+
+
+	/**
+	 * ゴールドプールを削除します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 */
+
+	public void deleteGoldPool(DeleteGoldPoolRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "";
+
+
+
+		HttpDelete delete = createHttpDelete(
+				url,
+				credential,
+				ENDPOINT,
+				DeleteGoldPoolRequest.Constant.MODULE,
+				DeleteGoldPoolRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            delete.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		doRequest(delete, null);
+
+	}
+
+
+	/**
+	 * ゴールドプールの一覧を取得します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public DescribeGoldPoolResult describeGoldPool(DescribeGoldPoolRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool";
+
+        List<NameValuePair> queryString = new ArrayList<>();
+        if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
+        if(request.getLimit() != null) queryString.add(new BasicNameValuePair("limit", String.valueOf(request.getLimit())));
+
+
+		if(queryString.size() > 0) {
+			url += "?" + URLEncodedUtils.format(queryString, "UTF-8");
+		}
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				DescribeGoldPoolRequest.Constant.MODULE,
+				DescribeGoldPoolRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(get, DescribeGoldPoolResult.class);
 
 	}
 
@@ -206,7 +451,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	public DescribeServiceClassResult describeServiceClass(DescribeServiceClassRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/serviceClass";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/serviceClass";
 
 
 
@@ -227,9 +472,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 
 	/**
-	 * ウォレットの一覧を取得します<br>
-	 * <br>
-	 * - 消費クオータ: 30件あたり10<br>
+	 * ゴールドプールを取得します<br>
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
@@ -238,47 +481,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	 */
 
-	public DescribeWalletResult describeWallet(DescribeWalletRequest request) {
+	public GetGoldPoolResult getGoldPool(GetGoldPoolRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet";
-
-        List<NameValuePair> queryString = new ArrayList<>();
-        if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
-        if(request.getLimit() != null) queryString.add(new BasicNameValuePair("limit", String.valueOf(request.getLimit())));
-
-
-		if(queryString.size() > 0) {
-			url += "?" + URLEncodedUtils.format(queryString, "UTF-8");
-		}
-		HttpGet get = createHttpGet(
-				url,
-				credential,
-				ENDPOINT,
-				DescribeWalletRequest.Constant.MODULE,
-				DescribeWalletRequest.Constant.FUNCTION);
-        if(request.getRequestId() != null) {
-            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-
-		return doRequest(get, DescribeWalletResult.class);
-
-	}
-
-
-	/**
-	 * ゴールドを取得します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 * @return 結果
-
-	 */
-
-	public GetGoldResult getGold(GetGoldRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "";
 
 
 
@@ -286,20 +491,20 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				url,
 				credential,
 				ENDPOINT,
-				GetGoldRequest.Constant.MODULE,
-				GetGoldRequest.Constant.FUNCTION);
+				GetGoldPoolRequest.Constant.MODULE,
+				GetGoldPoolRequest.Constant.FUNCTION);
         if(request.getRequestId() != null) {
             get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
         }
 
 
-		return doRequest(get, GetGoldResult.class);
+		return doRequest(get, GetGoldPoolResult.class);
 
 	}
 
 
 	/**
-	 * ゴールドの状態を取得します<br>
+	 * ゴールドプールの状態を取得します<br>
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
@@ -308,9 +513,9 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	 */
 
-	public GetGoldStatusResult getGoldStatus(GetGoldStatusRequest request) {
+	public GetGoldPoolStatusResult getGoldPoolStatus(GetGoldPoolStatusRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/status";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/status";
 
 
 
@@ -318,20 +523,20 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				url,
 				credential,
 				ENDPOINT,
-				GetGoldStatusRequest.Constant.MODULE,
-				GetGoldStatusRequest.Constant.FUNCTION);
+				GetGoldPoolStatusRequest.Constant.MODULE,
+				GetGoldPoolStatusRequest.Constant.FUNCTION);
         if(request.getRequestId() != null) {
             get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
         }
 
 
-		return doRequest(get, GetGoldStatusResult.class);
+		return doRequest(get, GetGoldPoolStatusResult.class);
 
 	}
 
 
 	/**
-	 * ゴールドを更新します<br>
+	 * ゴールドプールを更新します<br>
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
@@ -340,18 +545,11 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	 */
 
-	public UpdateGoldResult updateGold(UpdateGoldRequest request) {
+	public UpdateGoldPoolResult updateGoldPool(UpdateGoldPoolRequest request) {
 
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
 				.put("serviceClass", request.getServiceClass());
         if(request.getDescription() != null) body.put("description", request.getDescription());
-        if(request.getBalanceMax() != null) body.put("balanceMax", request.getBalanceMax());
-        if(request.getResetType() != null) body.put("resetType", request.getResetType());
-        if(request.getResetDayOfMonth() != null) body.put("resetDayOfMonth", request.getResetDayOfMonth());
-        if(request.getResetDayOfWeek() != null) body.put("resetDayOfWeek", request.getResetDayOfWeek());
-        if(request.getResetHour() != null) body.put("resetHour", request.getResetHour());
-        if(request.getLatestGainMax() != null) body.put("latestGainMax", request.getLatestGainMax());
-        if(request.getNotificationUrl() != null) body.put("notificationUrl", request.getNotificationUrl());
         if(request.getCreateWalletTriggerScript() != null) body.put("createWalletTriggerScript", request.getCreateWalletTriggerScript());
         if(request.getCreateWalletDoneTriggerScript() != null) body.put("createWalletDoneTriggerScript", request.getCreateWalletDoneTriggerScript());
         if(request.getDepositIntoWalletTriggerScript() != null) body.put("depositIntoWalletTriggerScript", request.getDepositIntoWalletTriggerScript());
@@ -359,18 +557,50 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
         if(request.getWithdrawFromWalletTriggerScript() != null) body.put("withdrawFromWalletTriggerScript", request.getWithdrawFromWalletTriggerScript());
         if(request.getWithdrawFromWalletDoneTriggerScript() != null) body.put("withdrawFromWalletDoneTriggerScript", request.getWithdrawFromWalletDoneTriggerScript());
 		HttpPut put = createHttpPut(
-				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "",
+				Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "",
 				credential,
 				ENDPOINT,
-				UpdateGoldRequest.Constant.MODULE,
-				UpdateGoldRequest.Constant.FUNCTION,
+				UpdateGoldPoolRequest.Constant.MODULE,
+				UpdateGoldPoolRequest.Constant.FUNCTION,
 				body.toString());
         if(request.getRequestId() != null) {
             put.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
         }
 
 
-		return doRequest(put, UpdateGoldResult.class);
+		return doRequest(put, UpdateGoldPoolResult.class);
+
+	}
+
+
+	/**
+	 * ゴールドマスターデータをエクスポートする<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public ExportMasterResult exportMaster(ExportMasterRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/master";
+
+
+
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				ExportMasterRequest.Constant.MODULE,
+				ExportMasterRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(get, ExportMasterResult.class);
 
 	}
 
@@ -389,7 +619,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	public GetWalletSettingsResult getWalletSettings(GetWalletSettingsRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/settings";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/settings";
 
 
 
@@ -410,37 +640,33 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 
 	/**
-	 * ウォレットの残高を加算します<br>
+	 * ウォレットを削除します<br>
 	 * <br>
 	 * - 消費クオータ: 3<br>
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
 
-	 * @return 結果
-
 	 */
 
-	public DepositIntoMyWalletResult depositIntoMyWallet(DepositIntoMyWalletRequest request) {
+	public void deleteWalletByUserId(DeleteWalletByUserIdRequest request) {
 
-		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("value", request.getValue());
-        if(request.getContext() != null) body.put("context", request.getContext());
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "";
 
-		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/self/action/deposit",
+
+
+		HttpDelete delete = createHttpDelete(
+				url,
 				credential,
 				ENDPOINT,
-				DepositIntoMyWalletRequest.Constant.MODULE,
-				DepositIntoMyWalletRequest.Constant.FUNCTION,
-				body.toString());
+				DeleteWalletByUserIdRequest.Constant.MODULE,
+				DeleteWalletByUserIdRequest.Constant.FUNCTION);
         if(request.getRequestId() != null) {
-            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+            delete.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
         }
 
-        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 
-		return doRequest(post, DepositIntoMyWalletResult.class);
+		doRequest(delete, null);
 
 	}
 
@@ -464,7 +690,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
         if(request.getContext() != null) body.put("context", request.getContext());
 
 		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "/action/deposit",
+				Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/self/action/deposit",
 				credential,
 				ENDPOINT,
 				DepositIntoWalletRequest.Constant.MODULE,
@@ -474,6 +700,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
             post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
         }
 
+        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 
 		return doRequest(post, DepositIntoWalletResult.class);
 
@@ -517,7 +744,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 
 	/**
-	 * ウォレットを取得します<br>
+	 * ウォレットの残高を加算します<br>
 	 * <br>
 	 * - 消費クオータ: 3<br>
 	 * <br>
@@ -528,25 +755,106 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	 */
 
-	public GetMyWalletResult getMyWallet(GetMyWalletRequest request) {
+	public DepositIntoWalletByUserIdResult depositIntoWalletByUserId(DepositIntoWalletByUserIdRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/self";
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("value", request.getValue());
+        if(request.getContext() != null) body.put("context", request.getContext());
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "/action/deposit",
+				credential,
+				ENDPOINT,
+				DepositIntoWalletByUserIdRequest.Constant.MODULE,
+				DepositIntoWalletByUserIdRequest.Constant.FUNCTION,
+				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
 
 
+		return doRequest(post, DepositIntoWalletByUserIdResult.class);
 
+	}
+
+
+	/**
+	 * ウォレットの一覧を取得します<br>
+	 * <br>
+	 * - 消費クオータ: 30件あたり10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public DescribeWalletResult describeWallet(DescribeWalletRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/gold";
+
+        List<NameValuePair> queryString = new ArrayList<>();
+        if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
+        if(request.getLimit() != null) queryString.add(new BasicNameValuePair("limit", String.valueOf(request.getLimit())));
+
+
+		if(queryString.size() > 0) {
+			url += "?" + URLEncodedUtils.format(queryString, "UTF-8");
+		}
 		HttpGet get = createHttpGet(
 				url,
 				credential,
 				ENDPOINT,
-				GetMyWalletRequest.Constant.MODULE,
-				GetMyWalletRequest.Constant.FUNCTION);
+				DescribeWalletRequest.Constant.MODULE,
+				DescribeWalletRequest.Constant.FUNCTION);
         if(request.getRequestId() != null) {
             get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
         }
 
         get.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 
-		return doRequest(get, GetMyWalletResult.class);
+		return doRequest(get, DescribeWalletResult.class);
+
+	}
+
+
+	/**
+	 * ウォレットの一覧を取得します<br>
+	 * <br>
+	 * - 消費クオータ: 30件あたり10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public DescribeWalletByUserIdResult describeWalletByUserId(DescribeWalletByUserIdRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/gold/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "";
+
+        List<NameValuePair> queryString = new ArrayList<>();
+        if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
+        if(request.getLimit() != null) queryString.add(new BasicNameValuePair("limit", String.valueOf(request.getLimit())));
+
+
+		if(queryString.size() > 0) {
+			url += "?" + URLEncodedUtils.format(queryString, "UTF-8");
+		}
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				DescribeWalletByUserIdRequest.Constant.MODULE,
+				DescribeWalletByUserIdRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(get, DescribeWalletByUserIdResult.class);
 
 	}
 
@@ -565,7 +873,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	public GetWalletResult getWallet(GetWalletRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/self";
 
 
 
@@ -579,8 +887,43 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
             get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
         }
 
+        get.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 
 		return doRequest(get, GetWalletResult.class);
+
+	}
+
+
+	/**
+	 * ウォレットを取得します<br>
+	 * <br>
+	 * - 消費クオータ: 3<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public GetWalletByUserIdResult getWalletByUserId(GetWalletByUserIdRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "";
+
+
+
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				GetWalletByUserIdRequest.Constant.MODULE,
+				GetWalletByUserIdRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(get, GetWalletByUserIdResult.class);
 
 	}
 
@@ -603,7 +946,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 				.put("value", request.getValue());
 
 		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "/action/set",
+				Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "/action/set",
 				credential,
 				ENDPOINT,
 				SetLatestGainRequest.Constant.MODULE,
@@ -631,42 +974,6 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
 
 	 */
 
-	public WithdrawFromMyWalletResult withdrawFromMyWallet(WithdrawFromMyWalletRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("value", request.getValue());
-        if(request.getContext() != null) body.put("context", request.getContext());
-
-		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/self/action/withdraw",
-				credential,
-				ENDPOINT,
-				WithdrawFromMyWalletRequest.Constant.MODULE,
-				WithdrawFromMyWalletRequest.Constant.FUNCTION,
-				body.toString());
-        if(request.getRequestId() != null) {
-            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		return doRequest(post, WithdrawFromMyWalletResult.class);
-
-	}
-
-
-	/**
-	 * ウォレットの残高を減算します<br>
-	 * <br>
-	 * - 消費クオータ: 3<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 * @return 結果
-
-	 */
-
 	public WithdrawFromWalletResult withdrawFromWallet(WithdrawFromWalletRequest request) {
 
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
@@ -674,7 +981,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
         if(request.getContext() != null) body.put("context", request.getContext());
 
 		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "/action/withdraw",
+				Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/self/action/withdraw",
 				credential,
 				ENDPOINT,
 				WithdrawFromWalletRequest.Constant.MODULE,
@@ -684,6 +991,7 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
             post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
         }
 
+        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 
 		return doRequest(post, WithdrawFromWalletResult.class);
 
@@ -723,6 +1031,41 @@ public class Gs2GoldClient extends AbstractGs2Client<Gs2GoldClient> {
         post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 
 		return doRequest(post, WithdrawFromWalletByStampTaskResult.class);
+
+	}
+
+
+	/**
+	 * ウォレットの残高を減算します<br>
+	 * <br>
+	 * - 消費クオータ: 3<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public WithdrawFromWalletByUserIdResult withdrawFromWalletByUserId(WithdrawFromWalletByUserIdRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("value", request.getValue());
+        if(request.getContext() != null) body.put("context", request.getContext());
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/goldPool/" + (request.getGoldPoolName() == null || request.getGoldPoolName().equals("") ? "null" : request.getGoldPoolName()) + "/gold/" + (request.getGoldName() == null || request.getGoldName().equals("") ? "null" : request.getGoldName()) + "/wallet/user/" + (request.getUserId() == null || request.getUserId().equals("") ? "null" : request.getUserId()) + "/action/withdraw",
+				credential,
+				ENDPOINT,
+				WithdrawFromWalletByUserIdRequest.Constant.MODULE,
+				WithdrawFromWalletByUserIdRequest.Constant.FUNCTION,
+				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(post, WithdrawFromWalletByUserIdResult.class);
 
 	}
 

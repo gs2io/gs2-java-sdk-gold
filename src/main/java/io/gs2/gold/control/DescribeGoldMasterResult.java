@@ -26,28 +26,49 @@ import io.gs2.gold.model.*;
  * @author Game Server Services, Inc.
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class DescribeServiceClassResult {
+public class DescribeGoldMasterResult {
 
-	/** サービスクラス一覧 */
-	private List<String> items;
+	/** ゴールド */
+	private List<GoldMaster> items;
+
+	/** 次のページを読み込むためのトークン */
+	private String nextPageToken;
 
 
 	/**
-	 * サービスクラス一覧を取得
+	 * ゴールドを取得
 	 *
-	 * @return サービスクラス一覧
+	 * @return ゴールド
 	 */
-	public List<String> getItems() {
+	public List<GoldMaster> getItems() {
 		return items;
 	}
 
 	/**
-	 * サービスクラス一覧を設定
+	 * ゴールドを設定
 	 *
-	 * @param items サービスクラス一覧
+	 * @param items ゴールド
 	 */
-	public void setItems(List<String> items) {
+	public void setItems(List<GoldMaster> items) {
 		this.items = items;
+	}
+
+	/**
+	 * 次のページを読み込むためのトークンを取得
+	 *
+	 * @return 次のページを読み込むためのトークン
+	 */
+	public String getNextPageToken() {
+		return nextPageToken;
+	}
+
+	/**
+	 * 次のページを読み込むためのトークンを設定
+	 *
+	 * @param nextPageToken 次のページを読み込むためのトークン
+	 */
+	public void setNextPageToken(String nextPageToken) {
+		this.nextPageToken = nextPageToken;
 	}
 
 }

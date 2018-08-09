@@ -20,16 +20,16 @@ import org.json.JSONObject;
 import java.util.List;
 import io.gs2.gold.model.*;
 import io.gs2.gold.Gs2Gold;
-import io.gs2.control.Gs2UserRequest;
+import io.gs2.control.Gs2BasicRequest;
 
 /**
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class DepositIntoWalletRequest extends Gs2UserRequest<DepositIntoWalletRequest> {
+public class DepositIntoWalletByUserIdRequest extends Gs2BasicRequest<DepositIntoWalletByUserIdRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
-		public static final String FUNCTION = "DepositIntoWallet";
+		public static final String FUNCTION = "DepositIntoWalletByUserId";
 	}
 
 	/** ゴールドプールの名前 */
@@ -37,6 +37,9 @@ public class DepositIntoWalletRequest extends Gs2UserRequest<DepositIntoWalletRe
 
 	/** ゴールドの名前 */
 	private String goldName;
+
+	/** ウォレット所有者のユーザID */
+	private String userId;
 
 	/** 加算量 */
 	private Long value;
@@ -69,7 +72,7 @@ public class DepositIntoWalletRequest extends Gs2UserRequest<DepositIntoWalletRe
 	 * @param goldPoolName ゴールドプールの名前
 	 * @return this
 	 */
-	public DepositIntoWalletRequest withGoldPoolName(String goldPoolName) {
+	public DepositIntoWalletByUserIdRequest withGoldPoolName(String goldPoolName) {
 		setGoldPoolName(goldPoolName);
 		return this;
 	}
@@ -98,8 +101,37 @@ public class DepositIntoWalletRequest extends Gs2UserRequest<DepositIntoWalletRe
 	 * @param goldName ゴールドの名前
 	 * @return this
 	 */
-	public DepositIntoWalletRequest withGoldName(String goldName) {
+	public DepositIntoWalletByUserIdRequest withGoldName(String goldName) {
 		setGoldName(goldName);
+		return this;
+	}
+
+	/**
+	 * ウォレット所有者のユーザIDを取得
+	 *
+	 * @return ウォレット所有者のユーザID
+	 */
+	public String getUserId() {
+		return userId;
+	}
+
+	/**
+	 * ウォレット所有者のユーザIDを設定
+	 *
+	 * @param userId ウォレット所有者のユーザID
+	 */
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	/**
+	 * ウォレット所有者のユーザIDを設定
+	 *
+	 * @param userId ウォレット所有者のユーザID
+	 * @return this
+	 */
+	public DepositIntoWalletByUserIdRequest withUserId(String userId) {
+		setUserId(userId);
 		return this;
 	}
 
@@ -127,7 +159,7 @@ public class DepositIntoWalletRequest extends Gs2UserRequest<DepositIntoWalletRe
 	 * @param value 加算量
 	 * @return this
 	 */
-	public DepositIntoWalletRequest withValue(Long value) {
+	public DepositIntoWalletByUserIdRequest withValue(Long value) {
 		setValue(value);
 		return this;
 	}
@@ -156,7 +188,7 @@ public class DepositIntoWalletRequest extends Gs2UserRequest<DepositIntoWalletRe
 	 * @param context コンテキスト
 	 * @return this
 	 */
-	public DepositIntoWalletRequest withContext(String context) {
+	public DepositIntoWalletByUserIdRequest withContext(String context) {
 		setContext(context);
 		return this;
 	}

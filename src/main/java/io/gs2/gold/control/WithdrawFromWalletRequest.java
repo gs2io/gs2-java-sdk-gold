@@ -18,24 +18,25 @@ package io.gs2.gold.control;
 
 import org.json.JSONObject;
 import java.util.List;
+import io.gs2.gold.model.*;
 import io.gs2.gold.Gs2Gold;
-import io.gs2.control.Gs2BasicRequest;
+import io.gs2.control.Gs2UserRequest;
 
 /**
  * @author Game Server Services, Inc.
  */
 @SuppressWarnings("serial")
-public class WithdrawFromWalletRequest extends Gs2BasicRequest<WithdrawFromWalletRequest> {
+public class WithdrawFromWalletRequest extends Gs2UserRequest<WithdrawFromWalletRequest> {
 
 	public static class Constant extends Gs2Gold.Constant {
 		public static final String FUNCTION = "WithdrawFromWallet";
 	}
 
-	/** ゴールドの名前を指定します。 */
-	private String goldName;
+	/** ゴールドプールの名前 */
+	private String goldPoolName;
 
-	/** ウォレット所有者のユーザIDを指定します。 */
-	private String userId;
+	/** ゴールドの名前 */
+	private String goldName;
 
 	/** 減算量 */
 	private Long value;
@@ -45,60 +46,60 @@ public class WithdrawFromWalletRequest extends Gs2BasicRequest<WithdrawFromWalle
 
 
 	/**
-	 * ゴールドの名前を指定します。を取得
+	 * ゴールドプールの名前を取得
 	 *
-	 * @return ゴールドの名前を指定します。
+	 * @return ゴールドプールの名前
+	 */
+	public String getGoldPoolName() {
+		return goldPoolName;
+	}
+
+	/**
+	 * ゴールドプールの名前を設定
+	 *
+	 * @param goldPoolName ゴールドプールの名前
+	 */
+	public void setGoldPoolName(String goldPoolName) {
+		this.goldPoolName = goldPoolName;
+	}
+
+	/**
+	 * ゴールドプールの名前を設定
+	 *
+	 * @param goldPoolName ゴールドプールの名前
+	 * @return this
+	 */
+	public WithdrawFromWalletRequest withGoldPoolName(String goldPoolName) {
+		setGoldPoolName(goldPoolName);
+		return this;
+	}
+
+	/**
+	 * ゴールドの名前を取得
+	 *
+	 * @return ゴールドの名前
 	 */
 	public String getGoldName() {
 		return goldName;
 	}
 
 	/**
-	 * ゴールドの名前を指定します。を設定
+	 * ゴールドの名前を設定
 	 *
-	 * @param goldName ゴールドの名前を指定します。
+	 * @param goldName ゴールドの名前
 	 */
 	public void setGoldName(String goldName) {
 		this.goldName = goldName;
 	}
 
 	/**
-	 * ゴールドの名前を指定します。を設定
+	 * ゴールドの名前を設定
 	 *
-	 * @param goldName ゴールドの名前を指定します。
+	 * @param goldName ゴールドの名前
 	 * @return this
 	 */
 	public WithdrawFromWalletRequest withGoldName(String goldName) {
 		setGoldName(goldName);
-		return this;
-	}
-
-	/**
-	 * ウォレット所有者のユーザIDを指定します。を取得
-	 *
-	 * @return ウォレット所有者のユーザIDを指定します。
-	 */
-	public String getUserId() {
-		return userId;
-	}
-
-	/**
-	 * ウォレット所有者のユーザIDを指定します。を設定
-	 *
-	 * @param userId ウォレット所有者のユーザIDを指定します。
-	 */
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	/**
-	 * ウォレット所有者のユーザIDを指定します。を設定
-	 *
-	 * @param userId ウォレット所有者のユーザIDを指定します。
-	 * @return this
-	 */
-	public WithdrawFromWalletRequest withUserId(String userId) {
-		setUserId(userId);
 		return this;
 	}
 

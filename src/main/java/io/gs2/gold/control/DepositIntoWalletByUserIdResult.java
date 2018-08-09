@@ -26,28 +26,28 @@ import io.gs2.gold.model.*;
  * @author Game Server Services, Inc.
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class DescribeServiceClassResult {
+public class DepositIntoWalletByUserIdResult {
 
-	/** サービスクラス一覧 */
-	private List<String> items;
+	/** ウォレット */
+	private Wallet item;
 
 
 	/**
-	 * サービスクラス一覧を取得
+	 * ウォレットを取得
 	 *
-	 * @return サービスクラス一覧
+	 * @return ウォレット
 	 */
-	public List<String> getItems() {
-		return items;
+	public Wallet getItem() {
+		return item;
 	}
 
 	/**
-	 * サービスクラス一覧を設定
+	 * ウォレットを設定
 	 *
-	 * @param items サービスクラス一覧
+	 * @param item ウォレット
 	 */
-	public void setItems(List<String> items) {
-		this.items = items;
+	public void setItem(Wallet item) {
+		this.item = item;
 	}
 
 }
